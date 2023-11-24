@@ -1,4 +1,3 @@
-
 /* MALL FÖR IMAGES 
 <img src="images/XXX.wbpg"
      alt="Crocheted ...."

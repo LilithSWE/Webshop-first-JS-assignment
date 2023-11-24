@@ -7,6 +7,7 @@ body {
   text-align: center;
   align-items: center;
   background-color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 h1 {
   font-family: 'Amatic SC', sans-serif;
@@ -15,24 +16,28 @@ h1 {
   margin: 10px;
   letter-spacing: 3px;
 }
-h2,
-h3,
-h4,
-h5,
-p {
-  font-family: 'Montserrat', sans-serif;
-}
 .toUpperCase {
   text-transform: uppercase;
 }
 .whiteTextColor {
   color: white;
 }
-.fade{
+.fade {
   opacity: 0.6;
 }
+button {
+  background-color: $darkPinkColor;
+  border: 3px dotted white;
+  border-radius: 30px;
+  color: white;
+  font-family: 'Amatic SC', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.2s;
+  margin: 2px;
+}
 button:active {
-  opacity: 0.5;
+  background-color: $darkPinkColorHalf;
   color: black;
 }
 header {
@@ -48,21 +53,12 @@ header {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-around;
-  border-bottom: 3px dotted white;
+  border-bottom: 2px dotted white;
   border-end-end-radius: 15px;
   border-end-start-radius: 15px;
   button {
-    background-color: $darkPinkColor;
-    border: 3px dotted white;
-    border-radius: 30px;
     width: 100px;
     height: 50px;
-    color: white;
-    font-family: 'Amatic SC', sans-serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: all 0.2s;
-    margin: 2px;
   }
 }
 section {
@@ -71,7 +67,7 @@ section {
 }
 .home {
   margin-top: 5rem;
-  article{
+  article {
     margin: 20px;
     border: 3px dotted $darkPinkColor;
     border-radius: 20px;
@@ -91,19 +87,21 @@ section {
       color: $lightPurpleColor;
     }
   }
-  
 }
-.productList {  //EJ KLAR
+.productList {
+  //EJ KLAR
   background-color: $pinkColor;
   height: 50px;
   width: 100%;
 }
-.cart {  //EJ KLAR
+.cart {
+  //EJ KLAR
   background-color: $darkPinkColor;
   height: 50px;
   width: 100%;
 }
-.orderForm{  //EJ KLAR
+.orderForm {
+  //EJ KLAR
   background-color: $lightPurpleColor;
   height: 50px;
   width: 100%;
@@ -114,8 +112,9 @@ footer {
   display: flex;
   flex-direction: column;
   padding-top: 10px;
+  padding-bottom: 1rem;
   background-color: $purpleColor;
-  border-top: 3px dotted white;
+  border-top: 2px dotted white;
   border-start-end-radius: 15px;
   border-start-start-radius: 15px;
   color: white;
@@ -123,7 +122,8 @@ footer {
     margin-top: 5px;
     margin-bottom: 3px;
     color: $pinkColor;
-    font-size: clamp(0.5rem, 4vw, 2rem);
+    font-size: clamp(0.5rem, 4vw, 5rem);
+    font-family: 'Amatic SC', sans-serif;
   }
   p {
     margin: 5px;
@@ -137,8 +137,10 @@ footer {
     padding-left: 3rem;
     gap: 10px;
     justify-content: space-evenly;
+    margin-bottom: 1rem;
     h4 {
-      margin-bottom: 0;
+      margin-top: 1rem;
+      margin-bottom: 0.2rem;
       font-size: clamp(0.5rem, 2vw, 2rem);
     }
     a {

@@ -28,6 +28,10 @@
       href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
 
     <title>Amanda's Amigurumi</title>
@@ -60,9 +64,43 @@
         </p>
       </article>
     </section>
+
     <section class="productList" id="productList">
-      <!-- Loopa in array med produkter -->
+      <button class="sortBtnOpenMenu toUpperCase" id="sortBtnOpenMenu">
+        <span class="material-symbols-outlined"> category </span>sort
+      </button>
+      <section class="sortPopDownMenu hidden" id="sortPopDownMenu">
+        <div>
+          <h3>Name:</h3>
+          <div class="sortBtnContainer">
+            <button><span class="material-symbols-outlined" id="nameSortUp">north</span></button>
+            <button><span class="material-symbols-outlined" id="nameSortDown">south</span></button>
+          </div>
+        </div>
+        <div>
+          <h3>Category:</h3>
+          <div class="sortBtnContainer">
+            <button><span class="material-symbols-outlined" id="categorySortUp">north</span></button>
+            <button><span class="material-symbols-outlined" id="categorySortDown">south</span></button>
+          </div>
+        </div>
+        <div>
+          <h3>Rating:</h3>
+          <div class="sortBtnContainer">
+            <button><span class="material-symbols-outlined" id="ratingSortUp">north</span></button>
+            <button><span class="material-symbols-outlined" id="ratingSortDown">south</span></button>
+          </div>
+        </div>
+        <div>
+          <h3>Price:</h3>
+          <div class="sortBtnContainer">
+            <button><span class="material-symbols-outlined" id="priceSortUp">north</span></button>
+            <button><span class="material-symbols-outlined" id="priceSortDown">south</span></button>
+          </div>
+        </div>
+      </section>
     </section>
+
     <section class="cart" id="cart">
       <!-- Varukorgen -->
     </section>

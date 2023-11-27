@@ -69,7 +69,7 @@ products.forEach(product => {
 
 /* eslint-disable prefer-template */
 /* eslint-disable no-plusplus */
-
+// All the different products. Can add or remove products as needed.
 const products = [
   // Add category!!
   {
@@ -80,7 +80,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Gryphon',
+    name: 'gryphon',
+    category: 'medium',
     rating: 4,
     price: 75,
     amount: 0,
@@ -93,7 +94,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Ariendale Terrier',
+    name: 'ariendale terrier',
+    category: 'medium',
     rating: 3.5,
     price: 100,
     amount: 0,
@@ -106,7 +108,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Brian the Brain',
+    name: 'brian the brain',
+    category: 'medium',
     rating: 4.7,
     price: 95,
     amount: 0,
@@ -119,7 +122,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Cacti Carl',
+    name: 'cacti carl',
+    category: 'small',
     rating: 3.6,
     price: 40,
     amount: 0,
@@ -132,7 +136,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Mushroom Buddy',
+    name: 'mushroom buddy',
+    category: 'small',
     rating: 4.2,
     price: 25,
     amount: 0,
@@ -145,7 +150,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Flail',
+    name: 'flail',
+    category: 'large',
     rating: 3.9,
     price: 120,
     amount: 0,
@@ -158,7 +164,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Gobbo',
+    name: 'gobbo',
+    category: 'small',
     rating: 4.3,
     price: 20,
     amount: 0,
@@ -171,7 +178,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Wiley',
+    name: 'wiley',
+    category: 'large',
     rating: 5,
     price: 600,
     amount: 0,
@@ -184,7 +192,8 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Super Mario',
+    name: 'super mario',
+    category: 'medium',
     rating: 4.8,
     price: 250,
     amount: 0,
@@ -197,14 +206,15 @@ const products = [
       height: 250,
       loading: 'lazy',
     },
-    name: 'Shirley the Skull',
+    name: 'shirley the skull',
+    category: 'medium',
     rating: 4.9,
     price: 95,
     amount: 0,
   },
 ];
 const productsContainer = document.querySelector('.productList'); // Targets the <section> I made for the products.
-// For loop för att skapa HTML element av min array + loopa ut i HTML strukturen inuti en <article>
+// For loop to create HTML elements + loop to the HTML structure inside an <article>
 for (let i = 0; i < products.length; i++) {
   const productIndividualContainer = document.createElement('article');
   productsContainer.appendChild(productIndividualContainer);
@@ -223,6 +233,15 @@ for (let i = 0; i < products.length; i++) {
   const productNameTextNode = document.createTextNode(productName);
   productNameH2.appendChild(productNameTextNode);
   productIndividualContainer.appendChild(productNameH2);
+  productNameH2.classList.add('capitalize'); // Adding css-made class to make text capitalized, incase font doesn't work.
+  // For the category
+  const productCategory = products[i].category;
+  const productCategoryP = document.createElement('p');
+  const productCategoryTextNode = document.createTextNode(productCategory);
+  productCategoryP.appendChild(productCategoryTextNode);
+  productIndividualContainer.appendChild(productCategoryP);
+  productCategoryP.classList.add('fade'); // Adding css-made class to make text faded.
+  productCategoryP.classList.add('capitalize'); // Adding css-made class to make text capitalized
   // For the rating
   const productRating = 'Rating: ' + products[i].rating + ' / 5';
   const productRatingP = document.createElement('p');
@@ -253,3 +272,68 @@ for (let i = 0; i < products.length; i++) {
   subtractButton.innerHTML = '-';
   productAmountDiv.appendChild(subtractButton);
 }
+
+// Opens menu for sorting products.
+const sortMenu = document.querySelector('#sortPopDownMenu');
+const sortMenuBtn = document.querySelector('#sortBtnOpenMenu');
+function openSortMenu() {
+  sortMenu.classList.toggle('hidden');
+}
+sortMenuBtn.addEventListener('click', openSortMenu);
+
+/*
+Namn på id för sortering: 
+nameSortUp, nameSortDown, 
+categorySortUp, categorySortDown, 
+ratingSortUp, ratingSortDown, 
+priceSortUp, priceSortDown
+*/
+
+// A function to sort the product on name
+// A function to sort the product on category
+// A function to sort the product on rating
+// A function to sort the product on price
+
+// A function to increase the amount of product using + button
+// A function to decrease the amount of product using - button
+// A function that adds the product to the cart (without adding 0 products) when "add to cart" is pressed.
+
+// CART
+// Add img + name + buttons + amount of product + total cost of X products + 'X' button for clear
+// Add 'clear cart' button at bottom
+// Add 'total price' for entire cart
+// Add animation to total price whenever it changes
+
+// ORDERFORM
+// Add summary of products - name, category, price total (ind.price * amount of product) + price total for purchases.
+// Add orderform - firstName, lastName, adress, postcode, town, optional: door code, phonenumber, e-mail.
+// Card as payment option -> cardnumber, date/year, CVC (don't validate these at this point in time)
+// Bill as payment option -> swedishPersonalNumber, (validate on length and starting with either '20' or '19' IF 12 numbers long)
+// Add checkbox 'Collecting of personal information' - not checked
+// Add checkbox 'News and updates email list' - checked
+// Add send button that activates only IF checkbox 'personal info' is ticked + form is validated. Otherwise = gray
+// Add clear form button - clears all the information AND the cart
+// When order is accepted -> send off + clear cart + announce summary + time until delivery + thank customer.
+// Add field to put in discount code
+
+// SPECIAL RULES FUNCTION
+// IF Monday 00.00 -> 10.00 = 10% discount, tell customer somehow
+// IF Friday 15.00 -> Monday 3.00 = +15% price, don't tell customer
+// IF customer total order price > 800kr, don't allow bill as payment option
+// IF the order contains at least 10 of one kind, lower the total price for that individual item by 10%
+// IF customer orders more than 15 products, shipping is free
+// IF customer orders less than 15 products, shipping is 25kr + 10% of total amount for cart.
+// If the customer hasn't ordered withni 15 min, clear the cart and announce that the customer was too slow.
+// The whole order should be able to be performed using only the keyboard.
+// The whole thing should be a one-pager.
+
+// BEFORE SUBMITTING
+// Publish page live
+// README containging screenshots + names of ppl whom have been a part of the project
+// Validate HTML
+// Validate CSS - but don't put too much thought into it.
+
+// AMANDAS EXTRA PLANS, ONLY IF THERE IS TIME
+// Add menu for navigation attached to either side of screen or header
+// Add a 'back to top' button
+// Add

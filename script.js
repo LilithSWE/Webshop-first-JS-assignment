@@ -62,6 +62,7 @@ products.forEach(product => {
 /* eslint-disable prefer-template */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
+/* eslint-disable no-use-before-define */
 
 // All the different products. Can add or remove products as needed.
 const products = [
@@ -208,10 +209,11 @@ const products = [
   },
 ];
 // Targets the id of the <section> I made for the products.
-const productsContainer = document.querySelector('#productsContainer'); 
+const productsContainer = document.querySelector('#productsContainer');
+loopProductsToHTML();
 // For loop to clear section and then create HTML elements + loop to the HTML structure inside an <article> each. Re-used post sorting.
-function loopProductsToHTML(){
-  productsContainer.innerHTML= '';
+function loopProductsToHTML() {
+  productsContainer.innerHTML = '';
   for (let i = 0; i < products.length; i++) {
     const productIndividualContainer = document.createElement('article');
     productsContainer.appendChild(productIndividualContainer);
@@ -255,15 +257,13 @@ function loopProductsToHTML(){
     const productAmountDiv = document.createElement('div');
     productIndividualContainer.appendChild(productAmountDiv);
 
-
-
     // Button 1 for adding products
     const addButton = document.createElement('button');
+    addButton.classList.add('addBtn');
     addButton.innerHTML = '+';
+    addButton.dataset.id = i;
     productAmountDiv.appendChild(addButton);
 
-
-    
     // For the amount
     const productAmount = products[i].amount;
     const productAmountP = document.createElement('p');
@@ -271,16 +271,76 @@ function loopProductsToHTML(){
     productAmountP.appendChild(productAmountTextNode);
     productAmountDiv.appendChild(productAmountP);
 
-
-
-    // Button 2 for decreasing product
+    // Button 2 for subtracting product
     const subtractButton = document.createElement('button');
     subtractButton.innerHTML = '-';
+    subtractButton.classList.add('subtractBtn');
+    subtractButton.dataset.id = i;
     productAmountDiv.appendChild(subtractButton);
   }
-};
-loopProductsToHTML();
+  remakeButtons();
+}
 
+// Increases the amount of product in the product list
+function addProductAmount(e) {
+  const i = e.currentTarget.dataset.id;
+  products[i].amount += 1;
+  loopProductsToHTML();
+  console.log(e.currentTarget.dataset.id);
+}
+// Decreases the amount of product in the product list, but not bellow 0.
+function reduceProductAmount(e) {
+  const i = e.currentTarget.dataset.id;
+  if (products[i].amount > 0) {
+    products[i].amount -= 1;
+    console.log(e.currentTarget.dataset.id);
+    loopProductsToHTML();
+  }
+}
+// Makes sure the buttons keep up with changes in product list.
+function remakeButtons() {
+  const addBtn = document.querySelectorAll('.addBtn');
+  const reduceBtn = document.querySelectorAll('.subtractBtn');
+  addBtn.forEach(btn => {
+    btn.addEventListener('click', addProductAmount);
+  });
+  reduceBtn.forEach(btn => {
+    btn.addEventListener('click', reduceProductAmount);
+  });
+}
+
+/*
+const increaseBtn = document.querySelector('#increase');
+const decreaseBtn = document.querySelector('#decrease');
+const startAmount = document.querySelector('#amount');
+let newAmount = Number(startAmount.value); 
+const price = document.querySelector('#price');
+
+increaseBtn.addEventListener('click', increaseAmount); 
+function increaseAmount() {
+  startAmount.value = newAmount += 1; 
+  updatePrice(); 
+}
+
+decreaseBtn.addEventListener('click', decreaseAmount); 
+function decreaseAmount() {
+  if (startAmount.value > 0) {
+    startAmount.value = newAmount -= 1; 
+  }
+  updatePrice(); 
+}
+
+function updatePrice() { 
+  price.innerHTML = newAmount * 15; 
+}
+
+startAmount.onchange = manualChange;
+function manualChange(e) {
+  newAmount= Number(e.target.value)
+  startAmount.value = newAmount;
+  updatePrice(); 
+}
+*/
 
 /*
 FÖR ATT LÄGGA TILL FLERA FUNCTIONS PÅ ALLA PRODUKTERS KNAPPAR SEN
@@ -298,7 +358,7 @@ const sortMenu = document.querySelector('#sortPopDownMenu');
 const sortMenuBtn = document.querySelector('#sortBtnOpenMenu');
 function openSortMenu() {
   sortMenu.classList.toggle('hidden');
-};
+}
 sortMenuBtn.addEventListener('click', openSortMenu);
 
 // SORTING ALL THE PRODUCTS
@@ -332,53 +392,52 @@ function sortProductsBackwards(property) {
 function sortProductsByName() {
   sortProducts('name');
 }
-const nameSortUpBtn = document.querySelector('#nameSortUp'); 
-nameSortUpBtn.addEventListener('click', sortProductsByName); 
+const nameSortUpBtn = document.querySelector('#nameSortUp');
+nameSortUpBtn.addEventListener('click', sortProductsByName);
 // Sorting by name Z -> A
 function sortProductsByNameDown() {
   sortProductsBackwards('name');
 }
-const nameSortDownBtn = document.querySelector('#nameSortDown'); 
-nameSortDownBtn.addEventListener('click', sortProductsByNameDown);  
+const nameSortDownBtn = document.querySelector('#nameSortDown');
+nameSortDownBtn.addEventListener('click', sortProductsByNameDown);
 // Sorting by category A -> Z
 function sortProductsByCategory() {
   sortProducts('category');
 }
-const categorySortUpBtn = document.querySelector('#categorySortUp'); 
-categorySortUpBtn.addEventListener('click', sortProductsByCategory); 
+const categorySortUpBtn = document.querySelector('#categorySortUp');
+categorySortUpBtn.addEventListener('click', sortProductsByCategory);
 // Sorting by category Z -> A
 function sortProductsByCategoryDown() {
   sortProductsBackwards('category');
 }
-const categorySortDownBtn = document.querySelector('#categorySortDown'); 
-categorySortDownBtn.addEventListener('click', sortProductsByCategoryDown);  
+const categorySortDownBtn = document.querySelector('#categorySortDown');
+categorySortDownBtn.addEventListener('click', sortProductsByCategoryDown);
 
-// Sort by rating 
+// Sort by rating
 function sortProductsByRating() {
   sortProducts('rating');
 }
-const ratingSortUpBtn = document.querySelector('#ratingSortUp'); 
-ratingSortUpBtn.addEventListener('click', sortProductsByRating); 
+const ratingSortUpBtn = document.querySelector('#ratingSortUp');
+ratingSortUpBtn.addEventListener('click', sortProductsByRating);
 // Sort by rating backwards
 function sortProductsByRatingDown() {
   sortProductsBackwards('rating');
 }
-const ratingSortDownBtn = document.querySelector('#ratingSortDown'); 
-ratingSortDownBtn.addEventListener('click', sortProductsByRatingDown); 
+const ratingSortDownBtn = document.querySelector('#ratingSortDown');
+ratingSortDownBtn.addEventListener('click', sortProductsByRatingDown);
 
-// Sort by price 
+// Sort by price
 function sortProductsByPrice() {
   sortProducts('price');
 }
-const priceSortUpBtn = document.querySelector('#priceSortUp'); 
-priceSortUpBtn.addEventListener('click', sortProductsByPrice); 
+const priceSortUpBtn = document.querySelector('#priceSortUp');
+priceSortUpBtn.addEventListener('click', sortProductsByPrice);
 // Sort by price backwards
 function sortProductsByPriceDown() {
   sortProductsBackwards('price');
 }
-const priceSortDownBtn = document.querySelector('#priceSortDown'); 
-priceSortDownBtn.addEventListener('click', sortProductsByPriceDown); 
-
+const priceSortDownBtn = document.querySelector('#priceSortDown');
+priceSortDownBtn.addEventListener('click', sortProductsByPriceDown);
 
 // A function that adds the product to the cart (without adding 0 products) when "add to cart" is pressed.
 

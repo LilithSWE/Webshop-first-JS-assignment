@@ -135,29 +135,29 @@ section {
     grid-template-columns: 45% 55%;
     grid-template-rows: 50% 50%;
     gap: 10px;
-    div{
+    div {
       width: 100%;
       grid-column: span 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 0;
-      h3{
+      h3 {
         font-size: 1.7rem;
         font-family: 'Amatic SC', sans-serif;
       }
-      div.sortBtnContainer{
+      div.sortBtnContainer {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        button{
+        button {
           width: 45px;
           height: auto;
         }
       }
     }
   }
-  section{
+  section {
     display: grid;
     grid-template-columns: repeat(1, 100%);
     grid-template-rows: auto;
@@ -212,7 +212,6 @@ section {
       }
     }
   }
-  
 }
 .cart {
   //EJ KLAR

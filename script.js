@@ -1,11 +1,4 @@
-/* MALL FÖR IMAGES 
-<img src="images/XXX.wbpg"
-     alt="Crocheted ...."
-     loading="lazy"
-     width="4rem"
-     height= "4rem"> */
-
-/* UPPDATERA VARUKORGEN SOM SEPARAT ARRAY
+/* UPPDATERA constUKORGEN SOM SEPARAT ARRAY
 const products = [
 	{
 		name: 'produkt 1',
@@ -39,7 +32,6 @@ function updateCart() {
 }
 updateCart();
 */
-
 /* HUR MAN LÄGGER 2 BILDER I SAMMA ARRAY
 const products = [
 	{
@@ -69,6 +61,8 @@ products.forEach(product => {
 
 /* eslint-disable prefer-template */
 /* eslint-disable no-plusplus */
+/* eslint-disable no-console */
+
 // All the different products. Can add or remove products as needed.
 const products = [
   // Add category!!
@@ -213,89 +207,179 @@ const products = [
     amount: 0,
   },
 ];
-const productsContainer = document.querySelector('.productList'); // Targets the <section> I made for the products.
-// For loop to create HTML elements + loop to the HTML structure inside an <article>
-for (let i = 0; i < products.length; i++) {
-  const productIndividualContainer = document.createElement('article');
-  productsContainer.appendChild(productIndividualContainer);
-  // For the image
-  const productImage = products[i].image;
-  const productImageImg = document.createElement('img');
-  productImageImg.setAttribute('src', productImage.src);
-  productImageImg.setAttribute('alt', productImage.alt);
-  productImageImg.setAttribute('height', productImage.height);
-  productImageImg.setAttribute('width', productImage.width);
-  productImageImg.setAttribute('loading', productImage.loading);
-  productIndividualContainer.appendChild(productImageImg);
-  // For the h2 - product name
-  const productName = products[i].name;
-  const productNameH2 = document.createElement('h2');
-  const productNameTextNode = document.createTextNode(productName);
-  productNameH2.appendChild(productNameTextNode);
-  productIndividualContainer.appendChild(productNameH2);
-  productNameH2.classList.add('capitalize'); // Adding css-made class to make text capitalized, incase font doesn't work.
-  // For the category
-  const productCategory = products[i].category;
-  const productCategoryP = document.createElement('p');
-  const productCategoryTextNode = document.createTextNode(productCategory);
-  productCategoryP.appendChild(productCategoryTextNode);
-  productIndividualContainer.appendChild(productCategoryP);
-  productCategoryP.classList.add('fade'); // Adding css-made class to make text faded.
-  productCategoryP.classList.add('capitalize'); // Adding css-made class to make text capitalized
-  // For the rating
-  const productRating = 'Rating: ' + products[i].rating + ' / 5';
-  const productRatingP = document.createElement('p');
-  const productRatingTextNode = document.createTextNode(productRating);
-  productRatingP.appendChild(productRatingTextNode);
-  productIndividualContainer.appendChild(productRatingP);
-  // For the price
-  const productPrice = products[i].price + ' kr/st';
-  const productPriceP = document.createElement('p');
-  const productPriceTextNode = document.createTextNode(productPrice);
-  productPriceP.appendChild(productPriceTextNode);
-  productIndividualContainer.appendChild(productPriceP);
-  // Div for easier styling of elements in <article>
-  const productAmountDiv = document.createElement('div');
-  productIndividualContainer.appendChild(productAmountDiv);
-  // Button 1 for adding products
-  const addButton = document.createElement('button');
-  addButton.innerHTML = '+';
-  productAmountDiv.appendChild(addButton);
-  // For the amount
-  const productAmount = products[i].amount;
-  const productAmountP = document.createElement('p');
-  const productAmountTextNode = document.createTextNode(productAmount);
-  productAmountP.appendChild(productAmountTextNode);
-  productAmountDiv.appendChild(productAmountP);
-  // Button 2
-  const subtractButton = document.createElement('button');
-  subtractButton.innerHTML = '-';
-  productAmountDiv.appendChild(subtractButton);
+// Targets the id of the <section> I made for the products.
+const productsContainer = document.querySelector('#productsContainer'); 
+// For loop to clear section and then create HTML elements + loop to the HTML structure inside an <article> each. Re-used post sorting.
+function loopProductsToHTML(){
+  productsContainer.innerHTML= '';
+  for (let i = 0; i < products.length; i++) {
+    const productIndividualContainer = document.createElement('article');
+    productsContainer.appendChild(productIndividualContainer);
+    // For the image
+    const productImage = products[i].image;
+    const productImageImg = document.createElement('img');
+    productImageImg.setAttribute('src', productImage.src);
+    productImageImg.setAttribute('alt', productImage.alt);
+    productImageImg.setAttribute('height', productImage.height);
+    productImageImg.setAttribute('width', productImage.width);
+    productImageImg.setAttribute('loading', productImage.loading);
+    productIndividualContainer.appendChild(productImageImg);
+    // For the h2 - product name
+    const productName = products[i].name;
+    const productNameH2 = document.createElement('h2');
+    const productNameTextNode = document.createTextNode(productName);
+    productNameH2.appendChild(productNameTextNode);
+    productIndividualContainer.appendChild(productNameH2);
+    productNameH2.classList.add('capitalize'); // Adding css-made class to make text capitalized, incase font doesn't work.
+    // For the category
+    const productCategory = products[i].category;
+    const productCategoryP = document.createElement('p');
+    const productCategoryTextNode = document.createTextNode(productCategory);
+    productCategoryP.appendChild(productCategoryTextNode);
+    productIndividualContainer.appendChild(productCategoryP);
+    productCategoryP.classList.add('fade'); // Adding css-made class to make text faded.
+    productCategoryP.classList.add('capitalize'); // Adding css-made class to make text capitalized
+    // For the rating
+    const productRating = 'Rating: ' + products[i].rating + ' / 5';
+    const productRatingP = document.createElement('p');
+    const productRatingTextNode = document.createTextNode(productRating);
+    productRatingP.appendChild(productRatingTextNode);
+    productIndividualContainer.appendChild(productRatingP);
+    // For the price
+    const productPrice = products[i].price + ' kr/st';
+    const productPriceP = document.createElement('p');
+    const productPriceTextNode = document.createTextNode(productPrice);
+    productPriceP.appendChild(productPriceTextNode);
+    productIndividualContainer.appendChild(productPriceP);
+    // Div for easier styling of elements in <article>
+    const productAmountDiv = document.createElement('div');
+    productIndividualContainer.appendChild(productAmountDiv);
+
+
+
+    // Button 1 for adding products
+    const addButton = document.createElement('button');
+    addButton.innerHTML = '+';
+    productAmountDiv.appendChild(addButton);
+
+
+    
+    // For the amount
+    const productAmount = products[i].amount;
+    const productAmountP = document.createElement('p');
+    const productAmountTextNode = document.createTextNode(productAmount);
+    productAmountP.appendChild(productAmountTextNode);
+    productAmountDiv.appendChild(productAmountP);
+
+
+
+    // Button 2 for decreasing product
+    const subtractButton = document.createElement('button');
+    subtractButton.innerHTML = '-';
+    productAmountDiv.appendChild(subtractButton);
+  }
+};
+loopProductsToHTML();
+
+
+/*
+FÖR ATT LÄGGA TILL FLERA FUNCTIONS PÅ ALLA PRODUKTERS KNAPPAR SEN
+const btns = document.querySelectorAll('button'); 
+for(let i = 0; i < btns.length; i++) {
+  btns.addEventListener('click', addProduct);
 }
+function addProduct() { // återanvänd samma funktion flera gånger
+  // do something on button click
+}
+*/
 
 // Opens menu for sorting products.
 const sortMenu = document.querySelector('#sortPopDownMenu');
 const sortMenuBtn = document.querySelector('#sortBtnOpenMenu');
 function openSortMenu() {
   sortMenu.classList.toggle('hidden');
-}
+};
 sortMenuBtn.addEventListener('click', openSortMenu);
 
-/*
-Namn på id för sortering: 
-nameSortUp, nameSortDown, 
-categorySortUp, categorySortDown, 
-ratingSortUp, ratingSortDown, 
-priceSortUp, priceSortDown
-*/
+// SORTING ALL THE PRODUCTS
+// Sorting function for all properties A->Z or 0 -> >0
+function sortProducts(property) {
+  products.sort((a, b) => {
+    if (a[property] < b[property]) {
+      return -1;
+    }
+    if (a[property] > b[property]) {
+      return 1;
+    }
+    return 0;
+  });
+  loopProductsToHTML();
+}
+// Sorting function for all properties Z->A or >0 -> 0
+function sortProductsBackwards(property) {
+  products.sort((a, b) => {
+    if (a[property] > b[property]) {
+      return -1;
+    }
+    if (a[property] < b[property]) {
+      return 1;
+    }
+    return 0;
+  });
+  loopProductsToHTML();
+}
+// Sorting by name A -> Z
+function sortProductsByName() {
+  sortProducts('name');
+}
+const nameSortUpBtn = document.querySelector('#nameSortUp'); 
+nameSortUpBtn.addEventListener('click', sortProductsByName); 
+// Sorting by name Z -> A
+function sortProductsByNameDown() {
+  sortProductsBackwards('name');
+}
+const nameSortDownBtn = document.querySelector('#nameSortDown'); 
+nameSortDownBtn.addEventListener('click', sortProductsByNameDown);  
+// Sorting by category A -> Z
+function sortProductsByCategory() {
+  sortProducts('category');
+}
+const categorySortUpBtn = document.querySelector('#categorySortUp'); 
+categorySortUpBtn.addEventListener('click', sortProductsByCategory); 
+// Sorting by category Z -> A
+function sortProductsByCategoryDown() {
+  sortProductsBackwards('category');
+}
+const categorySortDownBtn = document.querySelector('#categorySortDown'); 
+categorySortDownBtn.addEventListener('click', sortProductsByCategoryDown);  
 
-// A function to sort the product on name
-// A function to sort the product on category
-// A function to sort the product on rating
-// A function to sort the product on price
+// Sort by rating 
+function sortProductsByRating() {
+  sortProducts('rating');
+}
+const ratingSortUpBtn = document.querySelector('#ratingSortUp'); 
+ratingSortUpBtn.addEventListener('click', sortProductsByRating); 
+// Sort by rating backwards
+function sortProductsByRatingDown() {
+  sortProductsBackwards('rating');
+}
+const ratingSortDownBtn = document.querySelector('#ratingSortDown'); 
+ratingSortDownBtn.addEventListener('click', sortProductsByRatingDown); 
 
-// A function to increase the amount of product using + button
-// A function to decrease the amount of product using - button
+// Sort by price 
+function sortProductsByPrice() {
+  sortProducts('price');
+}
+const priceSortUpBtn = document.querySelector('#priceSortUp'); 
+priceSortUpBtn.addEventListener('click', sortProductsByPrice); 
+// Sort by price backwards
+function sortProductsByPriceDown() {
+  sortProductsBackwards('price');
+}
+const priceSortDownBtn = document.querySelector('#priceSortDown'); 
+priceSortDownBtn.addEventListener('click', sortProductsByPriceDown); 
+
+
 // A function that adds the product to the cart (without adding 0 products) when "add to cart" is pressed.
 
 // CART

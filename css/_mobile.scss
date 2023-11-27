@@ -139,7 +139,6 @@ section {
       width: 100%;
       grid-column: span 1;
       display: flex;
-      gap: 10px;
       align-items: center;
       justify-content: space-between;
       gap: 0;
@@ -158,53 +157,62 @@ section {
       }
     }
   }
-  article {
-    grid-column:
-      2,
-      span 1;
-    background-color: $lightPinkColor;
-    width: 320px;
-    height: auto;
-    border: 3px dotted white;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    img {
-      width: 250px;
-      height: 250px;
-      margin: 15px;
+  section{
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+    grid-template-rows: auto;
+    justify-items: center;
+    gap: 10px;
+    justify-content: center;
+    article {
+      grid-column:
+        2,
+        span 1;
+      background-color: $lightPinkColor;
+      width: 320px;
+      height: auto;
       border: 3px dotted white;
-    }
-    h2 {
-      margin: 5px;
-      font-size: clamp(1rem, 8vw, 5rem);
-      font-family: 'Amatic SC', sans-serif;
-    }
-    p {
-      margin: 5px;
-      font-size: clamp(1rem, 4vw, 1.5rem);
-    }
-    div {
-      margin-top: 15px;
-      margin-bottom: 15px;
-      width: 100%;
+      border-radius: 20px;
       display: flex;
-      flex-wrap: nowrap;
-      justify-content: space-evenly;
+      flex-direction: column;
       align-items: center;
-      button {
-        width: 5rem;
-        height: auto;
-        border-radius: 20px;
-        font-size: clamp(1rem, 8vw, 3rem);
+      img {
+        width: 250px;
+        height: 250px;
+        margin: 15px;
+        border: 3px dotted white;
+      }
+      h2 {
+        margin: 5px;
+        font-size: clamp(1rem, 8vw, 5rem);
+        font-family: 'Amatic SC', sans-serif;
       }
       p {
-        font-weight: bold;
-        font-size: clamp(1rem, 5vw, 4rem);
+        margin: 5px;
+        font-size: clamp(1rem, 4vw, 1.5rem);
+      }
+      div {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        button {
+          width: 5rem;
+          height: auto;
+          border-radius: 20px;
+          font-size: clamp(1rem, 8vw, 3rem);
+        }
+        p {
+          font-weight: bold;
+          font-size: clamp(1rem, 5vw, 4rem);
+        }
       }
     }
   }
+  
 }
 .cart {
   //EJ KLAR

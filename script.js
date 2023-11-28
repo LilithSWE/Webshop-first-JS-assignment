@@ -210,90 +210,40 @@ const products = [
 ];
 // Targets the id of the <section> I made for the products.
 const productsContainer = document.querySelector('#productsContainer');
-loopProductsToHTML();
+loopProductsToHTML(); // Initiates function once to get the products to the page. 
+
 // For loop to clear section and then create HTML elements + loop to the HTML structure inside an <article> each. Re-used post sorting.
 function loopProductsToHTML() {
-  productsContainer.innerHTML = '';
+  productsContainer.innerHTML = ''; // Clears container. 
   for (let i = 0; i < products.length; i++) {
-    const productIndividualContainer = document.createElement('article');
-    productsContainer.appendChild(productIndividualContainer);
-    // For the image
-    const productImage = products[i].image;
-    const productImageImg = document.createElement('img');
-    productImageImg.setAttribute('src', productImage.src);
-    productImageImg.setAttribute('alt', productImage.alt);
-    productImageImg.setAttribute('height', productImage.height);
-    productImageImg.setAttribute('width', productImage.width);
-    productImageImg.setAttribute('loading', productImage.loading);
-    productIndividualContainer.appendChild(productImageImg);
-    // For the h2 - product name
-    const productName = products[i].name;
-    const productNameH2 = document.createElement('h2');
-    const productNameTextNode = document.createTextNode(productName);
-    productNameH2.appendChild(productNameTextNode);
-    productIndividualContainer.appendChild(productNameH2);
-    productNameH2.classList.add('capitalize'); // Adding css-made class to make text capitalized, incase font doesn't work.
-    // For the category
-    const productCategory = products[i].category;
-    const productCategoryP = document.createElement('p');
-    const productCategoryTextNode = document.createTextNode(productCategory);
-    productCategoryP.appendChild(productCategoryTextNode);
-    productIndividualContainer.appendChild(productCategoryP);
-    productCategoryP.classList.add('fade'); // Adding css-made class to make text faded.
-    productCategoryP.classList.add('capitalize'); // Adding css-made class to make text capitalized
-    // For the rating
-    const productRating = 'Rating: ' + products[i].rating + ' / 5';
-    const productRatingP = document.createElement('p');
-    const productRatingTextNode = document.createTextNode(productRating);
-    productRatingP.appendChild(productRatingTextNode);
-    productIndividualContainer.appendChild(productRatingP);
-    // For the price
-    const productPrice = products[i].price + ' kr/st';
-    const productPriceP = document.createElement('p');
-    const productPriceTextNode = document.createTextNode(productPrice);
-    productPriceP.appendChild(productPriceTextNode);
-    productIndividualContainer.appendChild(productPriceP);
-    // Div for easier styling of elements in <article>
-    const productAmountDiv = document.createElement('div');
-    productIndividualContainer.appendChild(productAmountDiv);
-
-    // Button 1 for adding products
-    const addButton = document.createElement('button');
-    addButton.classList.add('addBtn');
-    addButton.innerHTML = '+';
-    addButton.dataset.id = i;
-    productAmountDiv.appendChild(addButton);
-
-    // For the amount
-    const productAmount = products[i].amount;
-    const productAmountP = document.createElement('p');
-    const productAmountTextNode = document.createTextNode(productAmount);
-    productAmountP.appendChild(productAmountTextNode);
-    productAmountDiv.appendChild(productAmountP);
-
-    // Button 2 for subtracting product
-    const subtractButton = document.createElement('button');
-    subtractButton.innerHTML = '-';
-    subtractButton.classList.add('subtractBtn');
-    subtractButton.dataset.id = i;
-    productAmountDiv.appendChild(subtractButton);
+    productsContainer.innerHTML +=
+    `<article>
+    <img src='${products[i].image.src}' alt='${products[i].image.alt}' height='${products[i].image.height} width='${products[i].image.width}' loading='lazy'>
+    <h2>${products[i].name}</h2>
+    <p class='fade capitalize'> ${products[i].category} </p>
+    <p>Rating: ${products[i].rating} / 5</p>
+    <p>${products[i].price} kr/st</p>
+    <div>
+      <button class='addBtn' id='${i}'>+</button>
+      <p>${products[i].amount}</p>
+      <button class='subtractBtn' id='${i}'>-</button>
+    </div>
+    </article>`;
   }
   remakeButtons();
+  updateCart();
 }
-
 // Increases the amount of product in the product list
 function addProductAmount(e) {
-  const i = e.currentTarget.dataset.id;
+  const i = e.currentTarget.id;
   products[i].amount += 1;
   loopProductsToHTML();
-  console.log(e.currentTarget.dataset.id);
 }
 // Decreases the amount of product in the product list, but not bellow 0.
 function reduceProductAmount(e) {
-  const i = e.currentTarget.dataset.id;
+  const i = e.currentTarget.id;
   if (products[i].amount > 0) {
     products[i].amount -= 1;
-    console.log(e.currentTarget.dataset.id);
     loopProductsToHTML();
   }
 }
@@ -308,7 +258,6 @@ function remakeButtons() {
     btn.addEventListener('click', reduceProductAmount);
   });
 }
-
 /*
 const increaseBtn = document.querySelector('#increase');
 const decreaseBtn = document.querySelector('#decrease');
@@ -342,17 +291,6 @@ function manualChange(e) {
 }
 */
 
-/*
-FÖR ATT LÄGGA TILL FLERA FUNCTIONS PÅ ALLA PRODUKTERS KNAPPAR SEN
-const btns = document.querySelectorAll('button'); 
-for(let i = 0; i < btns.length; i++) {
-  btns.addEventListener('click', addProduct);
-}
-function addProduct() { // återanvänd samma funktion flera gånger
-  // do something on button click
-}
-*/
-
 // Opens menu for sorting products.
 const sortMenu = document.querySelector('#sortPopDownMenu');
 const sortMenuBtn = document.querySelector('#sortBtnOpenMenu');
@@ -360,7 +298,6 @@ function openSortMenu() {
   sortMenu.classList.toggle('hidden');
 }
 sortMenuBtn.addEventListener('click', openSortMenu);
-
 // SORTING ALL THE PRODUCTS
 // Sorting function for all properties A->Z or 0 -> >0
 function sortProducts(property) {
@@ -439,10 +376,76 @@ function sortProductsByPriceDown() {
 const priceSortDownBtn = document.querySelector('#priceSortDown');
 priceSortDownBtn.addEventListener('click', sortProductsByPriceDown);
 
-// A function that adds the product to the cart (without adding 0 products) when "add to cart" is pressed.
+// A function that adds the product to the cart (without adding 0 products) when "add to cart" is pressed?. (updateCart koppla till knapp?)
+
+
+// For loop to clear section and then create HTML elements + loop to the HTML structure inside an <article> each. Re-used post sorting.
+function updateCart() {
+  const cartContainer = document.querySelector('.cart');
+  cartContainer.innerHTML = '';
+  const cart = products.filter(product => product.amount > 0);
+  /* 
+  Add constant for total price , make = 0 
+  + loop + add individualProductPrice to total pric
+  Loop out AFTER for loop
+
+  Make clear button 
+  Make it clar cart
+
+  Make individual clear buttons
+  Make them clear indicidual products
+  */
+  for (let i = 0; i < cart.length; i++) {
+    const individualCartPrice = Number(cart[i].amount)*Number(cart[i].price); // Calculates the price of each product in cart
+      cartContainer.innerHTML +=
+      `<article>
+      <img src='${cart[i].image.src}' alt='${cart[i].image.alt}' height='${cart[i].image.height} width='${cart[i].image.width}' loading='lazy'>
+      <h2>${cart[i].name}</h2>
+      <p class='individualCartPrice'>${individualCartPrice}kr</p>
+      <div>
+        <button class='addBtnCart' id='${i}'>+</button>
+        <p>${cart[i].amount}</p>
+        <button class='subtractBtnCart' id='${i}'>-</button>
+      </div>
+      <div class='bottomCartContainer'></div>
+      </article>`;
+  }
+  remakeCartButtons();
+}
+
+
+function remakeCartButtons() {
+  const addBtnCart = document.querySelectorAll('.addBtnCart');
+  const reduceBtnCart = document.querySelectorAll('.subtractBtnCart');
+  addBtnCart.forEach(btn => {
+    btn.addEventListener('click', addCartAmount);
+  });
+  reduceBtnCart.forEach(btn => {
+    btn.addEventListener('click', reduceCartAmount);
+  });
+}
+// Increases the amount of product in the cart list
+function addCartAmount(e) {
+  const cart = products.filter(product => product.amount > 0);
+  const i = e.currentTarget.id;
+  cart[i].amount += 1;
+  loopProductsToHTML();
+}
+// Decreases the amount of product in the cart list, but not below 0.
+function reduceCartAmount(e) {
+  const cart = products.filter(product => product.amount > 0);
+  const i = e.currentTarget.id;
+  if (cart[i].amount > 0) {
+    cart[i].amount -= 1;
+    loopProductsToHTML();
+  }
+}
+
+
+// For loop to clear section and then create HTML elements + loop to the HTML structure inside an <article> each. Re-used post sorting.
 
 // CART
-// Add img + name + buttons + amount of product + total cost of X products + 'X' button for clear
+// Add img + name + buttons + amount of cart + total cost of X productss + 'X' button for clear
 // Add 'clear cart' button at bottom
 // Add 'total price' for entire cart
 // Add animation to total price whenever it changes

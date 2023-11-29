@@ -40,7 +40,8 @@
     <header>
       <!-- Titel + meny + kundvagnknapp -->
       <h1>Amanda's Amigurumi</h1>
-      <button class="toUpperCase">kundvagn</button>
+      <button><span class="material-symbols-outlined"> shopping_basket </span></button>
+      <div class="productCounter hidden" id="productCounter"></div>
       <!-- Byt till ikon sen -->
     </header>
     <section class="home">
@@ -64,7 +65,6 @@
         </p>
       </article>
     </section>
-
     <section class="productList">
       <button class="sortBtnOpenMenu toUpperCase" id="sortBtnOpenMenu">
         <span class="material-symbols-outlined"> category </span>sort
@@ -99,13 +99,12 @@
           </div>
         </div>
       </section>
-      <section id="productsContainer">
+      <section class="productsContainer" id="productsContainer">
         <!--Loop for Products-->
       </section>
     </section>
-
     <section class="cart" id="cart">
-      <!-- Varukorgen -->
+      <!-- Loop for cart -->
     </section>
     <section class="orderForm" id="orderForm">
       <!-- Beställningsformuläret -->

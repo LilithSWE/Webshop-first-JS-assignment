@@ -378,8 +378,7 @@ function clearCart() {
 // Add animation to total price whenever the product amount changes, calculation is already done.
 // Add animation to updateCartCounter whenever the product amount changes.
 
-
-// ORDERFORM (3-4 dar)
+// ORDERFORM (3-4 days)
 // Add summary of products - name, category, price total (ind.price * amount of product) + price total for purchases.
 // Add orderform - firstName, lastName, adress, postcode, town, optional: door code, phonenumber, e-mail.
 // Card as payment option -> cardnumber, date/year, CVC (don't validate these at this point in time)
@@ -391,7 +390,7 @@ function clearCart() {
 // When order is accepted -> send off + clear cart + announce summary + time until delivery + thank customer.
 // Add field to put in discount code
 
-// SPECIAL RULES FUNCTION (3)
+// SPECIAL RULES FUNCTION (3 days)
 // IF Monday 00.00 -> 10.00 = 10% discount, tell customer somehow
 // IF Friday 15.00 -> Monday 3.00 = +15% price, don't tell customer
 // IF customer total order price > 800kr, don't allow bill as payment option

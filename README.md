@@ -7,7 +7,8 @@ This project was my first JS school assignment! I was tasked to create a one-pag
 - I learned how to make use of tools like Miro to set up the structure of the website in an easy to read way.
 - I learned how to write basic JS. How to make functions, call functions, create variables ect.
 - How to adapt the functions so that they are as versitile as possible, to avoid retyping parts of the code.
-- .....
+- I've learned various types of JS functions and how to connect them in a way that prevents unnecessary loops.
+-
 
 ## Requirements
 

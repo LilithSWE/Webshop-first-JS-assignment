@@ -233,6 +233,7 @@ ratingSortUpBtn.addEventListener('click', sortProductsByRating);
 ratingSortDownBtn.addEventListener('click', sortProductsByRatingDown);
 priceSortUpBtn.addEventListener('click', sortProductsByPrice);
 priceSortDownBtn.addEventListener('click', sortProductsByPriceDown);
+
 // Specific properties used when calling on the generic functions above
 function sortProductsByName() {
   sortProducts('name');
@@ -312,7 +313,6 @@ function updateCart() {
 }
 // Update the counter number on the shopping cart button.
 function updateCartCounter(e) {
-  console.log(e);
   const productCounter = document.querySelector('#productCounter');
   productCounter.innerHTML = e;
   if (productCounter.classList.contains('hidden')) {
@@ -328,6 +328,7 @@ function updateCartCounter(e) {
     }
   }
 }
+// Makes sure the buttons keep up with changes in cart list.
 function remakeCartButtons() {
   const addBtnCart = document.querySelectorAll('.addBtnCart');
   const reduceBtnCart = document.querySelectorAll('.subtractBtnCart');
@@ -361,14 +362,14 @@ function reduceCartAmount(e) {
     setTimeout(loopProductsToHTML, 200);
   }
 }
-// Clear one items total amount in cart
+// Clear one items 'total amount' in cart
 function clearOneProduct(e) {
   const cart = products.filter(product => product.amount > 0);
   const i = e.currentTarget.id;
   cart[i].amount = 0;
   setTimeout(loopProductsToHTML, 200);
 }
-// Clear entire cart
+// Clear entire cart from products
 function clearCart() {
   for (let i = 0; i < products.length; i++) {
     products[i].amount = 0;
@@ -378,7 +379,7 @@ function clearCart() {
 // Add animation to total price whenever the product amount changes, calculation is already done.
 // Add animation to updateCartCounter whenever the product amount changes.
 
-// ORDERFORM (3-4 days)
+// ORDERFORM (Tuesday -> half Thursday)
 // Add summary of products - name, category, price total (ind.price * amount of product) + price total for purchases.
 // Add orderform - firstName, lastName, adress, postcode, town, optional: door code, phonenumber, e-mail.
 // Card as payment option -> cardnumber, date/year, CVC (don't validate these at this point in time)
@@ -388,9 +389,21 @@ function clearCart() {
 // Add send button that activates only IF checkbox 'personal info' is ticked + form is validated. Otherwise = gray
 // Add clear form button - clears all the information AND the cart
 // When order is accepted -> send off + clear cart + announce summary + time until delivery + thank customer.
-// Add field to put in discount code
+// Add field to put in discount code (Needs to work? Yes or no?)
 
 // SPECIAL RULES FUNCTION (3 days)
+/* const today = new Date();
+console.log(today.getHours());
+
+if (today.getDay() === 0) {
+  console.log('Idag är det söndag.');
+}
+else{
+  console.log('Idag är det INTE söndag.'); 
+  }
+  */
+/* WEBSITE: https://www.w3schools.com/js/js_dates.asp */
+
 // IF Monday 00.00 -> 10.00 = 10% discount, tell customer somehow
 // IF Friday 15.00 -> Monday 3.00 = +15% price, don't tell customer
 // IF customer total order price > 800kr, don't allow bill as payment option
@@ -403,7 +416,6 @@ function clearCart() {
 // Mörk tema
 
 // BEFORE SUBMITTING
-// Publish page live
 // README containging screenshots + names of ppl whom have been a part of the project
 // Validate HTML
 // Validate CSS - but don't put too much thought into it.
@@ -411,30 +423,5 @@ function clearCart() {
 // AMANDAS EXTRA PLANS, ONLY IF THERE IS TIME
 // Add menu for navigation attached to either side of screen or header
 // Add a 'back to top' button
-// Add pop-down cart menu .
-
-/* HUR MAN LÄGGER 2 BILDER I SAMMA ARRAY
-const products = [
-	{
-		images: [
-			{
-				src: 'bild1.jpg
-			},
-
-			{
-				src: 'bild2.jpg'
-			},
-		],
-	},
-];
-products.forEach(product => {
-
-	const innerHTML = '';
-	const images = '';
- 
-	for (let i = 0; i < product.images.length; i++) {
-		images += `<img src="${product.images[i]}">`;
-	}
-	innerHTML += images;
-});
-*/
+// Add pop-down cart menu
+// Change colorVariable names to more semantic names like "Primary, Backgroundcolor, ImageBoxes".

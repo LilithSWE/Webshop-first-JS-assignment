@@ -38,11 +38,9 @@
   </head>
   <body>
     <header>
-      <!-- Titel + meny + kundvagnknapp -->
       <h1>Amanda's Amigurumi</h1>
       <button><span class="material-symbols-outlined"> shopping_basket </span></button>
       <div class="productCounter hidden" id="productCounter"></div>
-      <!-- Byt till ikon sen -->
     </header>
     <section class="home">
       <!-- Välkommnande meddelande + intro till affären -->
@@ -107,7 +105,78 @@
       <!-- Loop for cart -->
     </section>
     <section class="orderForm" id="orderForm">
-      <!-- Beställningsformuläret -->
+      <div class="orderFormAdressContainer">
+        <label>
+          <span class="whiteTextColor">First Name</span
+          ><input type="text" name="firstName" placeholder="First Name" value="John" />
+        </label>
+        <label>
+          <span class="whiteTextColor">Last Name</span
+          ><input type="text" name="lastName" placeholder="Last Name" value="Doe" />
+        </label>
+        <label>
+          <span class="whiteTextColor">Email</span
+          ><input type="email" name="email" placeholder="john.doe@potato.com" value="john.doe@potato.com" />
+        </label>
+        <label>
+          <span class="whiteTextColor">Phone Number</span
+          ><input type="tel" name="phoneNumber" placeholder="0712345678" value="0712345678" />
+        </label>
+        <label>
+          <span class="whiteTextColor">Street Address</span
+          ><input type="text" name="streetAdress" value="Potato Street 1" />
+        </label>
+        <label>
+          <span class="whiteTextColor">Postal/ Zip Code</span><input type="text" name="zipCode" value="12345" />
+          <!-- Ev number ist för text?  -->
+        </label>
+        <label> <span class="whiteTextColor">City</span><input type="text" name="city" value="Tomato Town" /> </label>
+        <label>
+          <span class="whiteTextColor">Port Code</span><input type="number" name="portcode" value="1234" />
+        </label>
+      </div>
+      <!-- Lägg till Jennis kod för payment , ev omskriven en aning -->
+      <!-- Lägg till 2 st checkboxes, mejllista + personuppgifter  -->
+      <!-- Clear btn + order btn (disabled) -->
+
+      <!--  JENNIS KOD     
+      <div class="payment-options">
+        <div class="selector">
+          <label>
+            <input type="radio" name="payment-option" value="invoice">
+            <span>Faktura</span>
+          </label>
+          <label>
+            <input type="radio" name="payment-option" value="card" checked>
+            <span>Kort</span>
+          </label>
+        </div>
+      
+        <div class="invoice hidden" id="invoice">
+          <label>
+            <span>Personnummer</span>
+            <input type="text" name="personal-id" id="personalID" value="19850505-1234">
+          </label>
+        </div>
+      
+        <div class="card" id="card">
+          <label>
+            <span>Kortnummer</span>
+            <input type="number" id="creditCardNumber" value="5100080000000000">
+          </label>
+          <label>
+            <span>Datum</span>
+            <span>
+                <input type="number" class="small" placeholder="YY" id="creditCardYear">/<input type="number" class="small" placeholder="MM" id="creditCardMonth">
+              </span>
+          </label>
+          <label>
+            <span>CVC</span>
+            <input type="number" placeholder="123" id="creditCardCvc">
+          </label>
+        </div>
+        <button id="orderBtn" disabled>Beställ</button>
+      </div> -->
     </section>
     <footer class="contact">
       <h3>Contact information:</h3>
@@ -126,3 +195,41 @@
     <script type="module" src="script.js"></script>
   </body>
 </html>
+
+<!-- 
+  OSKARS TIPS PÅ MIXINS 
+  JS
+if (
+  window.matchMedia &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches
+) {
+  document.body.classList.add('dark_mode');
+  darkMode.classList.toggle('hidden');
+} else {
+  lightMode.classList.toggle('hidden');
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('darkmode');
+  lightMode.classList.toggle('hidden');
+  darkMode.classList.toggle('hidden');
+
+
+
+MIXIN SASS_
+@mixin mixinnamn($light-theme: true) {
+  @if $light-theme {
+    background-color: white;
+    color: black;
+  } @else {
+    background-color: black;
+    color: white;
+  }
+}
+
+INCLUDE SASS_
+      @include mixin_namn($light-theme: true);
+      body.dark_mode & {
+        @include cart_product($light-theme: false);
+      }
+ -->

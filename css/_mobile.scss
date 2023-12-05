@@ -75,7 +75,7 @@ header {
     background-color: $darkPinkColor;
     border: 2px dotted white;
     position: absolute;
-    right: 50px;
+    right: 47px;
     top: 0.5rem;
     display: flex;
     align-items: center;
@@ -333,8 +333,32 @@ section {
 .orderForm {
   //EJ KLAR
   background-color: $lightPurpleColor;
-  height: 50px;
+  height: auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  div.orderFormAdressContainer {
+    margin: 10px;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    align-items: center;
+    span {
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      font-weight: bold;
+    }
+    input {
+      display: block;
+      height: 2rem;
+      align-self: center;
+      margin-bottom: 5px;
+      border: none;
+      border-radius: 5px;
+    }
+  }
 }
 footer {
   width: 100%;

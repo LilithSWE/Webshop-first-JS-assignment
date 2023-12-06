@@ -331,7 +331,6 @@ section {
   }
 }
 .orderForm {
-  //EJ KLAR
   background-color: $lightPurpleColor;
   height: auto;
   width: 100%;
@@ -339,24 +338,124 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  div.orderFormAdressContainer {
+  div.orderFormContainer {
+    background-color: $purpleColor;
+    border: 3px dotted white;
+    border-radius: 15px;
     margin: 10px;
+    padding: 5px;
     width: 95%;
     display: flex;
     flex-direction: column;
     text-align: start;
     align-items: center;
-    span {
-      font-size: clamp(1rem, 4vw, 1.5rem);
-      font-weight: bold;
+    div {
+      display: flex;
+      flex-direction: column;
+      text-align: start;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 10px;
+      label {
+        display: flex;
+        width: 60vw;
+        span {
+          font-size: clamp(1rem, 4vw, 1.5rem);
+          font-weight: bold;
+        }
+        input {
+          display: block;
+          height: 2rem;
+          width: 100%;
+          margin-top: 2px;
+          margin-bottom: 15px;
+          border: none;
+          border-radius: 5px;
+        }
+      }
     }
-    input {
-      display: block;
-      height: 2rem;
-      align-self: center;
-      margin-bottom: 5px;
-      border: none;
-      border-radius: 5px;
+    div.orderFormAdressContainer,
+    div.orderFormInvoiceContainer,
+    div.orderFormCardContainer {
+      label {
+        display: block;
+        span{
+          input{
+            display: block;
+            height: 2rem;
+            width: 100%;
+            margin-top: 2px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+          }
+        }
+      }
+      div{
+        padding-top: 0;
+        padding-bottom: 0;
+        label{
+          span{
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            input.half{
+              max-width: 80%;
+            }
+            p{
+              margin: 5px;
+            }
+          }
+        }                    
+      }
+    }
+    div.orderFormPaymentContainer {
+      flex-direction: row;
+      width: 60vw;
+      label {
+        width: 100%;
+        align-items: center;
+        justify-content: space-evenly;
+        input {
+          width: 3rem;
+          justify-self: center;
+        }
+      }
+    }
+    div.orderFormCheckboxesContainer {
+      label {
+        span {
+          font-size: clamp(1rem, 1vw, 1.5rem);
+          padding-right: 5px;
+          margin: 5px;
+        }
+        input {
+          margin: 5px;
+        }
+      }
+      div.discountContainer{
+        label{
+          flex-direction: column;
+          margin-bottom: 20px;
+          span{
+            font-size: clamp(1rem,4vw,1.5rem);
+            margin: 0;
+          }
+          input{
+            margin: 0;
+          }
+        }
+      }
+    }
+    div.orderFormBtnContainer{
+      flex-direction: row;
+      justify-content: space-between;
+      width: 95%;
+      button{
+        height: 3rem;
+        width: 45%;
+        font-size: clamp(1rem, 7vw, 2rem);
+      }
     }
   }
 }

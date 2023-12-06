@@ -105,78 +105,103 @@
       <!-- Loop for cart -->
     </section>
     <section class="orderForm" id="orderForm">
-      <div class="orderFormAdressContainer">
-        <label>
-          <span class="whiteTextColor">First Name</span
-          ><input type="text" name="firstName" placeholder="First Name" value="John" />
-        </label>
-        <label>
-          <span class="whiteTextColor">Last Name</span
-          ><input type="text" name="lastName" placeholder="Last Name" value="Doe" />
-        </label>
-        <label>
-          <span class="whiteTextColor">Email</span
-          ><input type="email" name="email" placeholder="john.doe@potato.com" value="john.doe@potato.com" />
-        </label>
-        <label>
-          <span class="whiteTextColor">Phone Number</span
-          ><input type="tel" name="phoneNumber" placeholder="0712345678" value="0712345678" />
-        </label>
-        <label>
-          <span class="whiteTextColor">Street Address</span
-          ><input type="text" name="streetAdress" value="Potato Street 1" />
-        </label>
-        <label>
-          <span class="whiteTextColor">Postal/ Zip Code</span><input type="text" name="zipCode" value="12345" />
-          <!-- Ev number ist för text?  -->
-        </label>
-        <label> <span class="whiteTextColor">City</span><input type="text" name="city" value="Tomato Town" /> </label>
-        <label>
-          <span class="whiteTextColor">Port Code</span><input type="number" name="portcode" value="1234" />
-        </label>
-      </div>
-      <!-- Lägg till Jennis kod för payment , ev omskriven en aning -->
-      <!-- Lägg till 2 st checkboxes, mejllista + personuppgifter  -->
-      <!-- Clear btn + order btn (disabled) -->
-
-      <!--  JENNIS KOD     
-      <div class="payment-options">
-        <div class="selector">
+      <div class="orderFormContainer">
+        <div class="orderFormAdressContainer">
           <label>
-            <input type="radio" name="payment-option" value="invoice">
-            <span>Faktura</span>
+            <span class="whiteTextColor">First Name</span>
+            <input type="text" name="firstName" placeholder="First Name" id="firstName" value="John" />
           </label>
           <label>
-            <input type="radio" name="payment-option" value="card" checked>
-            <span>Kort</span>
+            <span class="whiteTextColor">Last Name</span
+            ><input type="text" name="lastName" placeholder="Last Name" id="lastName" value="Doe" />
+          </label>
+          <label>
+            <span class="whiteTextColor">Email</span
+            ><input type="email" name="email" placeholder="john.doe@potato.com" id="email" value="john.doe@potato.com" />
+          </label>
+          <label>
+            <span class="whiteTextColor">Phone Number</span
+            ><input type="tel" name="phoneNumber" placeholder="0712345678" id="phoneNumber" value="0712345678" />
+          </label>
+          <label>
+            <span class="whiteTextColor">Street Address</span
+            ><input type="text" name="streetAdress" placeholder="Street Adress" id="streetAdress" value="Potato Street 1" />
+          </label>
+          <label>
+            <span class="whiteTextColor">Postal/ Zip Code</span> <!-- Ev number ist för text?  -->
+            <input type="text" name="zipCode" placeholder="Postal/ Zip Code" id="zipCode" value="12345" />
+          </label>
+          <label>
+            <span class="whiteTextColor">City</span>
+            <input type="text" name="city" placeholder="city" id="city" value="Tomato Town" /> 
+          </label>
+          <label>
+            <span class="whiteTextColor">Port Code</span>
+            <input type="number" name="portcode" placeholder="portCode" value="1234" />
           </label>
         </div>
-      
-        <div class="invoice hidden" id="invoice">
+        <div class="orderFormPaymentContainer">
           <label>
-            <span>Personnummer</span>
-            <input type="text" name="personal-id" id="personalID" value="19850505-1234">
+            <span class="whiteTextColor">Invoice</span>
+            <input type="radio" name="payment-option" value="invoice" />
+          </label>
+          <label>
+            <span class="whiteTextColor">Card</span>
+            <input type="radio" name="payment-option" value="card" checked />
           </label>
         </div>
-      
-        <div class="card" id="card">
+        <div class="orderFormInvoiceContainer" id="invoiceContainer">
           <label>
-            <span>Kortnummer</span>
-            <input type="number" id="creditCardNumber" value="5100080000000000">
+            <span class="whiteTextColor">Personal ID number</span>
+            <input type="text" name="personal-id" placeholder="1900-000000" id="personalID" value="19850505-1234" />
           </label>
+        </div>
+        <div class="orderFormCardContainer hidden" id="cardContainer">
           <label>
-            <span>Datum</span>
-            <span>
-                <input type="number" class="small" placeholder="YY" id="creditCardYear">/<input type="number" class="small" placeholder="MM" id="creditCardMonth">
+            <span class="whiteTextColor">Card number</span>
+            <input
+              type="number"
+              name="creditCardNumber"
+              placeholder="0000000000000000"
+              id="creditCardNumber"
+              value="5100080000000000"
+            />
+          </label>
+          <div>
+            <label>
+              <span class="whiteTextColor">Datum</span>
+              <span class="whiteTextColor">
+                <input type="number" class="half" placeholder="YY" id="creditCardYear" /><p>/</p>
+                <input type="number" class="half" placeholder="MM" id="creditCardMonth" />
               </span>
-          </label>
+            </label>
+          </div>
           <label>
-            <span>CVC</span>
-            <input type="number" placeholder="123" id="creditCardCvc">
+            <span class="whiteTextColor">CVC</span>
+            <input type="number" placeholder="123" id="creditCardCvc" />
           </label>
         </div>
-        <button id="orderBtn" disabled>Beställ</button>
-      </div> -->
+        <div class="orderFormCheckboxesContainer">
+          <div class="discountContainer">
+            <label>
+              <span class="whiteTextColor">Discount Code</span>
+              <input type="text" class="discount" name="discount" id="discount" placeholder="...">
+            </label>
+          </div>
+          <label>
+            <span class="whiteTextColor">Send me newsletters and updates about the shop!</span>
+            <input type="checkbox" name="newsletter" id="newsletter" checked />
+          </label>
+          <label>
+            <span class="whiteTextColor">I accept the handling of my personal information.</span>
+            <input type="checkbox" name="termsAndConditions" id="termsAndConditions" />
+          </label>
+        </div>
+        <div class="orderFormBtnContainer">
+          <button id="clearAllBtn">Clear</button>
+          <button id="sendOrderBtn" disabled>Order</button>
+        </div>
+      </div>
     </section>
     <footer class="contact">
       <h3>Contact information:</h3>

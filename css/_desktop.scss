@@ -1,8 +1,8 @@
 header {
   grid-template-columns: 1fr 15rem;
   h1 {
-  word-spacing: 2rem;
-  margin-left: 17rem;
+    word-spacing: 2rem;
+    margin-left: 17rem;
   }
   button {
     width: 6rem;
@@ -87,7 +87,7 @@ header {
   div.bottomCartContainer {
     grid-column: span 2;
     height: 100%;
-    p{
+    p {
       font-size: clamp(1rem, 3vw, 3rem);
     }
     div.bottomCartBtnContainer {
@@ -158,10 +158,10 @@ header {
           grid-column: 1 / span 2;
           width: 100%;
         }
-        }
+      }
     }
   }
-}  
+}
 footer {
   h3 {
     font-size: clamp(0.5rem, 2vw, 10rem);

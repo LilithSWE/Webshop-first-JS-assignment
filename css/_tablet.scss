@@ -27,7 +27,7 @@ header {
     .material-symbols-outlined {
       width: min-content;
     }
-    span{
+    span {
       width: 80%;
       justify-self: end;
     }
@@ -40,7 +40,7 @@ header {
     gap: 20px;
     div {
       display: grid;
-      grid-template-columns:  35% 65%;
+      grid-template-columns: 35% 65%;
       grid-template-rows: auto;
       h3 {
         font-size: 2rem;

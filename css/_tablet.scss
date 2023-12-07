@@ -1,0 +1,147 @@
+header {
+  height: 5rem;
+  grid-template-columns: 1fr 6rem;
+  h1 {
+    font-size: clamp(3rem, 8vw, 3.8rem);
+    letter-spacing: 11px;
+  }
+  button {
+    width: 5rem;
+  }
+  div.productCounter {
+    height: 30px;
+    width: 30px;
+    right: 5.4rem;
+    top: 0.3rem;
+    border-radius: 20px;
+  }
+}
+.productList {
+  padding-top: 90px;
+  button.sortBtnOpenMenu {
+    width: 8rem;
+    padding: 0;
+    padding-block: 10px;
+    font-size: clamp(1rem, 4vw, 2rem);
+    margin: -80px;
+    .material-symbols-outlined {
+      width: min-content;
+    }
+    span{
+      width: 80%;
+      justify-self: end;
+    }
+  }
+  section.sortPopDownMenu {
+    width: auto;
+    max-height: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    div {
+      display: grid;
+      grid-template-columns:  35% 65%;
+      grid-template-rows: auto;
+      h3 {
+        font-size: 2rem;
+        margin: 0;
+        font-family: 'Amatic SC', sans-serif;
+      }
+      div.sortBtnContainer {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto;
+        gap: 15px;
+        button {
+          width: 4rem;
+          height: 3rem;
+        }
+      }
+    }
+  }
+  section.productsContainer {
+    grid-template-columns: repeat(2, 50%);
+    gap: 30px;
+    article {
+      width: 100%;
+      img {
+        width: clamp(200px, 30vw, 300px);
+        height: clamp(200px, 30vw, 300px);
+        margin: 25px;
+      }
+      h2 {
+        font-size: clamp(1rem, 8vw, 4rem);
+      }
+      p {
+        font-size: clamp(1rem, 3vw, 2rem);
+      }
+    }
+  }
+}
+.cart {
+  article {
+    grid-template-rows: 60% 40%;
+    border-radius: 20px;
+    padding: 10px;
+    h2 {
+      font-weight: bold;
+    }
+    div.cartAmountContainer {
+      button {
+        width: 30%;
+        height: 4rem;
+        font-size: 3rem;
+      }
+    }
+    button.clearOneBtn {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+    p.individualCartPrice {
+      font-size: clamp(1rem, 5vw, 3rem);
+    }
+  }
+  div.bottomCartContainer {
+    div.bottomCartBtnContainer {
+      button.clearCartBtn,
+      button.orderBtn {
+        width: 35%;
+        height: 4rem;
+        border-radius: 20px;
+        font-size: clamp(1rem, 6vw, 3rem);
+      }
+    }
+  }
+}
+.orderForm {
+  div.orderFormContainer {
+    div.orderFormPaymentContainer {
+      width: 40vw;
+    }
+    div.orderFormCheckboxesContainer {
+      label {
+        span {
+          font-size: clamp(1rem, 2.5vw, 3rem);
+          margin: 10px;
+        }
+      }
+    }
+  }
+}
+footer {
+  padding-top: 20px;
+  h3 {
+    font-size: clamp(0.5rem, 5vw, 7rem);
+  }
+  address {
+    h4 {
+      font-size: clamp(0.5rem, 2.5vw, 2rem);
+    }
+    a {
+      font-size: clamp(0.5rem, 1.5vw, 2rem);
+    }
+    p {
+      font-size: clamp(0.5rem, 1.5vw, 2rem);
+    }
+  }
+}

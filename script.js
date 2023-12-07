@@ -424,5 +424,5 @@ else{
 // Add menu for navigation attached to either side of screen or header
 // Add a 'back to top' button
 // Add pop-down cart menu
-// Change checkbox + radio btn color! 
+// Change checkbox + radio btn color!
 // Change colorVariable names to more semantic names like "Primary, Backgroundcolor, ImageBoxes".

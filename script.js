@@ -379,7 +379,163 @@ function clearCart() {
 // Add animation to total price whenever the product amount changes, calculation is already done.
 // Add animation to updateCartCounter whenever the product amount changes.
 
-// ORDERFORM (Tuesday -> half Thursday)
+
+// ORDERFORM 
+// Validation
+// All RegEx for validation of user information
+const nameRegEx = /^[a-zäöå,.'-]+$/i; // Used for both names
+const emailRegEx = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
+const phoneNumberRegEx = /^(0)(7[0236])(\d{4})*(\d{3})$/; // Matches a classic Swedish number (without country code)
+const streetAdressRegEx = /^([A-zäöåÄÖÅ.'-]{2,40}?\s)+([0-9]{1,5}[A-z]{0,3}?)(\s[A-z]{0,2})?$/;
+const zipCodeRegEx = /^[1-9]\d{2}\s?\d{2}/;
+const cityRegEx = /^([A-zåäöÅÄÖ.'-]{2,})+(\s[A-zåäöÅÄÖ.'-]{0,})?$/;
+const personalIdRegEx = /^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})/;
+// All the variables targeting the input fields that needs to validated
+const firstNameInput = document.querySelector('#firstName');
+const lastNameInput = document.querySelector('#lastName');
+const emailInput = document.querySelector('#email');
+const phoneNumberInput = document.querySelector('#phoneNumber');
+const streetAdressInput = document.querySelector('#streetAdress');
+const zipCodeInput = document.querySelector('#zipCode');
+const cityInput = document.querySelector('#city');
+const personalIdInput = document.querySelector('#personalId');
+// Calls functions to validate the input from user when they change the value
+firstNameInput.addEventListener('blur', validateFirstName); 
+lastNameInput.addEventListener('blur', validateLastName);
+emailInput.addEventListener('blur', validateEmail);
+phoneNumberInput.addEventListener('blur', validatePhoneNumber);
+streetAdressInput.addEventListener('blur', validateStreet);
+zipCodeInput.addEventListener('blur', validateZipCode);
+cityInput.addEventListener('blur', validateCity);
+personalIdInput.addEventListener('blur', validatePersonalId);
+// Running all of the RegEx vs the info to validate in an if-statement function. 
+function validateFirstName (){
+  const firstName = firstNameInput.value
+  const result = nameRegEx.exec(firstName); 
+  if (result === null) {
+    console.log ('failed test');
+  }
+  else if (result.length > 0) {
+    console.log ('First name is working!');
+  };  
+}
+function validateLastName (){
+  const lastName = lastNameInput.value
+  const result = nameRegEx.exec(lastName); 
+
+  if (result === null) {
+    console.log ('failed test');
+  }
+  else if (result.length > 0) {
+    console.log ('Last name is working!');
+  };  
+}
+function validateEmail (){
+  const email = emailInput.value
+  const result = emailRegEx.exec(email); 
+
+  if (result === null) {
+    console.log ('failed test');
+  }
+  else if (result.length > 0) {
+    console.log ('Email is working!');
+  };  
+}
+function validatePhoneNumber (){
+  const phoneNumber = phoneNumberInput.value
+  const result = phoneNumberRegEx.exec(phoneNumber); 
+
+  if (result === null) {
+    console.log ('failed test');
+  }
+  else if (result.length > 0) {
+    console.log ('Phone is working!');
+  };  
+}
+function validateStreet (){
+  const streetAdress = streetAdressInput.value
+  const result = streetAdressRegEx.exec(streetAdress); 
+
+  if (result === null) {
+    console.log ('failed test');
+  }
+  else if (result.length > 0) {
+    console.log ('Adress is working!');
+  };  
+}
+function validateZipCode (){
+  const zipCode = zipCodeInput.value
+  const result = zipCodeRegEx.exec(zipCode); 
+
+  if (result === null) {
+    console.log ('failed test');
+  }
+  else if (result.length > 0) {
+    console.log ('Zip code is working!');
+  };  
+}
+function validateCity (){
+  const city = cityInput.value
+  const result = cityRegEx.exec(city); 
+
+  if (result === null) {
+    console.log ('failed test');
+  }
+  else if (result.length > 0) {
+    console.log ('City is working!');
+  };  
+}
+function validatePersonalId (){
+  const personalId = personalIdInput.value
+  const result = personalIdRegEx.exec(personalId); 
+
+  if (result === null) {
+    console.log ('failed test');
+  }
+  else if (result.length > 0) {
+    console.log ('Personal Id is working!');
+  };  
+}
+
+// Switch payment opt.
+// Payment divs
+const invoiceContainer = document.querySelector('#invoiceContainer');
+const cardContainer = document.querySelector('#cardContainer');
+// Radio btns to change divs
+const cardInvoiceRadios = Array.from(document.querySelectorAll('input[name="payment-option"]'));
+cardInvoiceRadios.forEach(radioBtn => {
+  radioBtn.addEventListener('change', switchPaymentMethod);
+});
+function switchPaymentMethod() {
+  invoiceContainer.classList.toggle('hidden');
+  cardContainer.classList.toggle('hidden');
+}
+
+/* const orderBtn = document.querySelector('#sendOrderBtn'); */
+/* orderBtn.addEventListener('click', funtion XXX); */
+
+const clearAllBtn = document.querySelector('#clearAllBtn');
+clearAllBtn.addEventListener('click', clearAllChoices);
+
+function clearAllChoices() {
+  // Calls prev function to clear all pruducts. 
+  clearCart();
+  // Runs functions with all divs
+  clearInputValues('orderFormContainer');  
+}
+// Clears all values from the inputs in the div Ids that we send in. 
+function clearInputValues(divId) {
+  const div = document.getElementById(divId);
+  if (div) {
+      // Get all input elements within the div
+      const inputs = div.getElementsByTagName('input');
+      for (let i = 0; i < inputs.length; i++) {
+          inputs[i].value = '';
+      }
+  } else {
+      console.error('Div not found with id:', divId);
+  }
+}
 // Add summary of products - name, category, price total (ind.price * amount of product) + price total for purchases.
 // Add orderform - firstName, lastName, adress, postcode, town, optional: door code, phonenumber, e-mail.
 // Card as payment option -> cardnumber, date/year, CVC (don't validate these at this point in time)

@@ -45,7 +45,7 @@
     <section class="home">
       <!-- Välkommnande meddelande + intro till affären -->
       <article>
-        <h2>Welcome to <span class="whiteTextColor">Amanda's Amigurumi</span>!</h2>
+        <h2>Welcome to <span class="toUpperCase">Amanda's Amigurumi</span>!</h2>
         <h3>Where the whimsical world of amigurumi comes to life!</h3>
         <p>
           Step into a realm of adorable crochet creations that will capture your heart and spark joy in every stitch.
@@ -105,29 +105,28 @@
       <!-- Loop for cart -->
     </section>
     <section class="orderForm" id="orderForm">
-      <div class="orderFormContainer">
+      <div class="orderFormContainer" id="orderFormContainer">
         <div class="orderFormAdressContainer">
           <label>
             <span class="whiteTextColor">First Name</span>
-            <input type="text" name="firstName" placeholder="First Name" id="firstName" value="John" />
+            <input type="text" name="firstName" placeholder="First Name" id="firstName" />
           </label>
           <label>
             <span class="whiteTextColor">Last Name</span
-            ><input type="text" name="lastName" placeholder="Last Name" id="lastName" value="Doe" />
+            ><input type="text" name="lastName" placeholder="Last Name" id="lastName" />
           </label>
           <label>
             <span class="whiteTextColor">Email</span
             ><input
               type="email"
               name="email"
-              placeholder="john.doe@potato.com"
+              placeholder="Amanda@amigurumi.com"
               id="email"
-              value="john.doe@potato.com"
             />
           </label>
           <label>
             <span class="whiteTextColor">Phone Number</span
-            ><input type="tel" name="phoneNumber" placeholder="0712345678" id="phoneNumber" value="0712345678" />
+            ><input type="tel" name="phoneNumber" placeholder="07..." id="phoneNumber" />
           </label>
           <label>
             <span class="whiteTextColor">Street Address</span
@@ -136,57 +135,49 @@
               name="streetAdress"
               placeholder="Street Adress"
               id="streetAdress"
-              value="Potato Street 1"
             />
           </label>
           <label>
             <span class="whiteTextColor">Postal/ Zip Code</span>
-            <!-- Ev number ist för text?  -->
-            <input type="text" name="zipCode" placeholder="Postal/ Zip Code" id="zipCode" value="12345" />
+            <input type="text" name="zipCode" placeholder="Postal/ Zip Code" id="zipCode" />
           </label>
           <label>
             <span class="whiteTextColor">City</span>
-            <input type="text" name="city" placeholder="city" id="city" value="Tomato Town" />
+            <input type="text" name="city" placeholder="City" id="city" />
           </label>
           <label>
             <span class="whiteTextColor">Port Code</span>
-            <input type="number" name="portcode" placeholder="portCode" value="1234" />
+            <input type="number" name="portcode" placeholder="Port Code" />
           </label>
         </div>
         <div class="orderFormPaymentContainer">
           <label>
             <span class="whiteTextColor">Invoice</span>
-            <input type="radio" name="payment-option" value="invoice" />
+            <input type="radio" name="payment-option" id="invoice" checked />
           </label>
           <label>
             <span class="whiteTextColor">Card</span>
-            <input type="radio" name="payment-option" value="card" checked />
+            <input type="radio" name="payment-option" value="card" id="card" />
           </label>
         </div>
         <div class="orderFormInvoiceContainer" id="invoiceContainer">
           <label>
             <span class="whiteTextColor">Personal ID number</span>
-            <input type="text" name="personal-id" placeholder="1900-000000" id="personalID" value="19850505-1234" />
+            <input type="text" name="personal-id" placeholder="0000-000000" id="personalId" />
           </label>
         </div>
         <div class="orderFormCardContainer hidden" id="cardContainer">
           <label>
             <span class="whiteTextColor">Card number</span>
-            <input
-              type="number"
-              name="creditCardNumber"
-              placeholder="0000000000000000"
-              id="creditCardNumber"
-              value="5100080000000000"
-            />
+            <input type="number" name="creditCardNumber" placeholder="Card number" id="creditCardNumber" />
           </label>
           <div>
             <label>
-              <span class="whiteTextColor">Datum</span>
+              <span class="whiteTextColor">Date</span>
               <span class="whiteTextColor">
-                <input type="number" class="half" placeholder="YY" id="creditCardYear" />
+                <input type="number" class="half" placeholder="yy" id="creditCardYear" />
                 <p>/</p>
-                <input type="number" class="half" placeholder="MM" id="creditCardMonth" />
+                <input type="number" class="half" placeholder="mm" id="creditCardMonth" />
               </span>
             </label>
           </div>

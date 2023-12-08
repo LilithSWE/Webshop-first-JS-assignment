@@ -162,6 +162,56 @@ header {
         }
       }
     }
+    article.summaryPopUpContainer{
+      h2{
+        font-size: clamp(1rem, 10vw, 20rem);
+        text-align: center;
+        font-family: 'Amatic SC', sans-serif;
+      }
+      p{
+        font-size: clamp(1rem, 2vw, 4rem);
+        text-align: center;
+        align-self: center;
+        width: 80%;
+      }
+      h4{
+        font-size: clamp(1rem, 4vw, 6rem);
+        width: 70%;
+        align-self: center;
+      }
+      article{
+        grid-template-columns: 1fr 2fr 2fr;
+        grid-template-rows: 1fr 1fr;
+        width: 70%;
+        img{
+          width: clamp(100px, 10vw, 250px);
+          height: clamp(100px, 10vw, 250px);
+          border: 2px solid white;
+          border-radius: 50px;
+          align-self: center;
+          margin: 10px;
+        }
+        h3{
+        font-size: clamp(1rem, 5vw, 10rem);
+        font-family: 'Amatic SC', sans-serif;
+        }
+        p{
+          font-size: clamp(1rem, 2vw, 6rem);
+        }
+      }
+      p.delivery{
+        font-size: clamp(1rem, 3vw, 4rem);
+        margin-top: 20px;
+        font-weight: bold;
+      }
+      button{
+        height: 5rem;
+        width: 20%;
+        align-self: center;
+        margin-top: 2rem;
+        font-size: 3rem;
+      }
+    }
   }
 }
 footer {

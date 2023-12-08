@@ -38,6 +38,10 @@ button:active {
   background-color: $darkPinkColorClick;
   color: black;
 }
+button:disabled {
+  background-color:rgb(150, 150, 150);
+  color: black;
+}
 header {
   background-color: $purpleColor;
   color: $lightPinkColor;
@@ -142,7 +146,7 @@ section {
   section.sortPopDownMenu {
     grid-column: 1;
     background-color: $lightPinkColor;
-    width: 320px;
+    width: 100%;
     height: auto;
     border: 3px dotted white;
     border-radius: 20px;
@@ -174,6 +178,8 @@ section {
   }
   section.productsContainer {
     display: grid;
+    max-width: 100%;
+    padding: 0;
     grid-template-columns: repeat(1, 100%);
     grid-template-rows: auto;
     justify-items: center;
@@ -181,7 +187,7 @@ section {
     justify-content: space-evenly;
     article {
       background-color: $lightPinkColor;
-      width: 320px;
+      max-width: 320px;
       height: auto;
       border: 3px dotted white;
       border-radius: 20px;
@@ -318,8 +324,7 @@ section {
     div.bottomCartBtnContainer {
       display: flex;
       justify-content: space-around;
-      button.clearCartBtn,
-      button.orderBtn {
+      button{
         width: 40%;
         height: 2.5rem;
         border-radius: 10px;
@@ -455,6 +460,79 @@ section {
         height: 3rem;
         width: 45%;
         font-size: clamp(1rem, 7vw, 2rem);
+      }
+    }
+    article.summaryPopUpContainer{
+      position: fixed;
+      top:8%;
+      left: 2.5%;
+      width: 95%;
+      min-width: 280px;
+      height: 90%;
+      padding: 20px;
+      background-color: $lightPurpleColor;
+      color: black;
+      border: 6px solid white;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column; 
+      gap: 10px;
+      overflow: scroll;
+      h2{
+        font-size: clamp(1rem, 8vw, 4rem);
+      }
+      p{
+        font-size: clamp(1rem, 5vw, 4rem);
+        margin: 0;
+      }
+      h4{
+        font-size: clamp(1rem, 6vw, 6rem);
+        margin-bottom: 2px;
+      }
+      article{
+        border: 2px solid $purpleColor;
+        background-color: $darkPinkColor;
+        border-radius: 10px;
+        padding: 3px;
+        margin-bottom: 5px;
+        display: grid;
+        grid-template-columns: 6rem 1fr 1fr;
+        grid-template-rows: 50px 50px;
+        justify-items: center;
+        align-items: end;
+        img{
+          grid-row: span 2;
+          width: 5rem;
+          height: 5rem;
+          border: 2px solid white;
+          border-radius: 50px;
+          align-self: center;
+        }
+        h3{
+        grid-column: 2/span 2;
+        margin: 0;
+        font-size: clamp(1rem, 4vw, 5rem);
+        font-family: 'Montserrat', sans-serif;
+        }
+        p{
+          font-weight: bold;
+          margin-block: 0;
+          align-self: center;
+          font-size: clamp(1rem, 4vw, 6rem);
+          font-family: 'Montserrat', sans-serif;
+        }
+      }
+      p.delivery{
+        margin-top: 20px;
+        font-weight: bold;
+      }
+      button{
+        height: 3rem;
+        width: 50%;
+        align-self: center;
+        margin-top: 2rem;
+        font-size: 2rem;
+        color: black;
       }
     }
   }

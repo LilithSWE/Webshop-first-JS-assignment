@@ -163,7 +163,7 @@
         <div class="orderFormInvoiceContainer" id="invoiceContainer">
           <label>
             <span class="whiteTextColor">Personal ID number</span>
-            <input type="text" name="personal-id" placeholder="0000-000000" id="personalId" />
+            <input type="text" name="personal-id" placeholder="000000-0000" id="personalId" />
           </label>
         </div>
         <div class="orderFormCardContainer hidden" id="cardContainer">
@@ -204,8 +204,11 @@
         </div>
         <div class="orderFormBtnContainer">
           <button id="clearAllBtn">Clear</button>
-          <button id="sendOrderBtn" disabled>Order</button>
+          <button id="sendOrderBtn">Order</button> <!-- disabled -->
         </div>
+        <article class="summaryPopUpContainer hidden" id="summaryPopUpContainer">
+          <!-- Loop in thank you, summary + delivery time from JS -->
+        </article>
       </div>
     </section>
     <footer class="contact">

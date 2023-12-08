@@ -126,6 +126,29 @@ header {
         }
       }
     }
+    article.summaryPopUpContainer{
+      h2{
+        font-size: clamp(1rem, 11vw, 4rem);
+        text-align: center;
+        font-family: 'Amatic SC', sans-serif;
+      }
+      p{
+        font-size: clamp(1rem, 3vw, 4rem);
+      }
+      h4{
+        font-size: clamp(1rem, 4vw, 6rem);
+      }
+      article{
+        width: 80%;
+        align-self: center;
+        h3{
+        font-size: clamp(1rem, 4vw, 5rem);
+        }
+        p{
+          font-size: clamp(1rem, 3vw, 6rem);
+        }
+      }
+    }
   }
 }
 footer {

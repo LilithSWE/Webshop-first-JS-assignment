@@ -3,6 +3,8 @@
 /* eslint-disable no-console */
 /* eslint-disable no-use-before-define */
 
+
+
 // PRODUCT LIST
 // All the different products. Can add or remove products as needed.
 const products = [
@@ -169,8 +171,7 @@ function loopProductsToHTML() {
   remakeButtons();
   updateCart();
 }
-
-// SORTING ALL THE PRODUCTS
+// SORTING
 // Open menu for sorting
 const sortMenu = document.querySelector('#sortPopDownMenu');
 const sortMenuBtn = document.querySelector('#sortBtnOpenMenu');
@@ -233,7 +234,6 @@ ratingSortUpBtn.addEventListener('click', sortProductsByRating);
 ratingSortDownBtn.addEventListener('click', sortProductsByRatingDown);
 priceSortUpBtn.addEventListener('click', sortProductsByPrice);
 priceSortDownBtn.addEventListener('click', sortProductsByPriceDown);
-
 // Specific properties used when calling on the generic functions above
 function sortProductsByName() {
   sortProducts('name');
@@ -259,8 +259,7 @@ function sortProductsByPrice() {
 function sortProductsByPriceDown() {
   sortProductsBackwards('price');
 }
-
-// CHANGES IN PRODUCT AMOUNTS
+// Changes in products amount
 // Increases the amount of product in the product list
 function addProductAmount(e) {
   const i = e.currentTarget.id;
@@ -275,6 +274,8 @@ function reduceProductAmount(e) {
     setTimeout(loopProductsToHTML, 200);
   }
 }
+
+
 
 // CART
 // For loop to clear section and then create HTML elements + loop to the HTML structure inside an <article> each. Re-used post sorting.
@@ -380,8 +381,10 @@ function clearCart() {
 // Add animation to updateCartCounter whenever the product amount changes.
 
 
+
+
 // ORDERFORM 
-// Validation
+// VALIDATION
 // All RegEx for validation of user information
 const nameRegEx = /^[a-zäöå,.'-]+$/i; // Used for both names
 const emailRegEx = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
@@ -408,7 +411,7 @@ streetAdressInput.addEventListener('blur', validateStreet);
 zipCodeInput.addEventListener('blur', validateZipCode);
 cityInput.addEventListener('blur', validateCity);
 personalIdInput.addEventListener('blur', validatePersonalId);
-// Running all of the RegEx vs the info to validate in an if-statement function. 
+// Running all of the RegEx vs the info to validate in an if-statement function.  LÄGG TILL FELMEDDELANDE TOGGLES
 function validateFirstName (){
   const firstName = firstNameInput.value
   const result = nameRegEx.exec(firstName); 
@@ -511,16 +514,68 @@ function switchPaymentMethod() {
   cardContainer.classList.toggle('hidden');
 }
 
-/* const orderBtn = document.querySelector('#sendOrderBtn'); */
-/* orderBtn.addEventListener('click', funtion XXX); */
 
+// SEND ORDER BTN
+// Send order button variable from HTML + eventlistener
+const orderBtn = document.querySelector('#sendOrderBtn');
+orderBtn.addEventListener('click', summaryPopUp);
+
+// Add validation funtion -> remove disabled from BTN !!! 
+
+// Targets the container in which we will loop our order summary.
+const summaryPopUpContainer = document.querySelector('#summaryPopUpContainer');
+// Function that generates and displays the thank you, order summary and the estimated deliverytime + removes class ='hidden'. 
+function summaryPopUp() {
+  // Resets inner HTML from previous run with a personalised thank you. 
+  summaryPopUpContainer.innerHTML = `
+  <h2>Thank you for your purchase ${firstNameInput.value} ${lastNameInput.value}!</h2>
+  <p> We appreciate your patronage. 
+  Should you have any questions or need any further assistance, feel free to reach out. 
+  We look forward to serving you again in the future.</p> 
+  <h4 class='orderSummaryTitle'>Order Summary:</h4>`;
+  // Loops out the same summary that cart has, with some edits to amount of information and without the buttons. 
+  let sum = 0;
+  const cart = products.filter(product => product.amount > 0);
+  for (let i = 0; i < cart.length; i++) {
+    sum += cart[i].amount * cart[i].price;
+    const individualCartPrice = Number(cart[i].amount) * Number(cart[i].price); // Calculates the price of each product in cart
+    summaryPopUpContainer.innerHTML += `<article>
+      <img src='${cart[i].image.src}' alt='${cart[i].image.alt}' height='${cart[i].image.height} width='${cart[i].image.width}' loading='lazy'>
+      <h3 class= 'capitalize'>${cart[i].name}</h3>
+      <p class='fade'>Amount: ${cart[i].amount}</p>
+      <p class='individualCartPrice fade''>${individualCartPrice}kr</p>
+      </article>`;
+  }
+  // Adds the total price and an estimated delivery time
+  summaryPopUpContainer.innerHTML+=`
+  <p>Total price: ${sum}kr.</p>
+  <p class= 'delivery'>Estimated delivery: </p>
+  <p>3-4 buissness days.</p>
+  <button class= 'closeSummaryBtn' id='closeSummaryBtn'>Close</button>`;
+  // Makes the "popup" <article> visible on the page
+  summaryPopUpContainer.classList.remove('hidden');
+  makeCloseBtnSummary();
+}
+// Adds eventlistener to the close btn made in the summaryPopUp function.
+function makeCloseBtnSummary(){
+  const closeSummaryBtn = document.querySelector('#closeSummaryBtn');
+  closeSummaryBtn.addEventListener('click', closeSummaryPopUpContainer);
+}
+// Puts class hidden on oder summary to hide it away + runs function to clear orderform + all products.amount. 
+function closeSummaryPopUpContainer (){
+  summaryPopUpContainer.classList.add('hidden');
+  clearAllChoices(); 
+}
+
+// CLEAR ALL BTN
+// Clear all info button. 
 const clearAllBtn = document.querySelector('#clearAllBtn');
 clearAllBtn.addEventListener('click', clearAllChoices);
-
+// A function to clear orderform + all products.amount. 
 function clearAllChoices() {
   // Calls prev function to clear all pruducts. 
   clearCart();
-  // Runs functions with all divs
+  // Runs functions with all divs in the oderFormContainer. 
   clearInputValues('orderFormContainer');  
 }
 // Clears all values from the inputs in the div Ids that we send in. 
@@ -536,6 +591,12 @@ function clearInputValues(divId) {
       console.error('Div not found with id:', divId);
   }
 }
+
+
+
+summaryPopUp(); 
+
+
 // Add summary of products - name, category, price total (ind.price * amount of product) + price total for purchases.
 // Add orderform - firstName, lastName, adress, postcode, town, optional: door code, phonenumber, e-mail.
 // Card as payment option -> cardnumber, date/year, CVC (don't validate these at this point in time)

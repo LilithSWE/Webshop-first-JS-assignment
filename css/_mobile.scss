@@ -24,6 +24,13 @@ body {
 .hidden {
   display: none !important;
 }
+.error{
+  background-color: $darkPinkColor; 
+  color: rgb(169, 29, 29);
+  font-size: bold;
+  padding-inline: 5px;
+  border-radius: 5px;
+}
 button {
   background-color: $darkPinkColor;
   border: 2px dotted white;

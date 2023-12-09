@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable prefer-template */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
@@ -393,134 +394,165 @@ const streetAdressRegEx = /^([A-zäöåÄÖÅ.'-]{2,40}?\s)+([0-9]{1,5}[A-z]{0,3
 const zipCodeRegEx = /^[1-9]\d{2}\s?\d{2}/;
 const cityRegEx = /^([A-zåäöÅÄÖ.'-]{2,})+(\s[A-zåäöÅÄÖ.'-]{0,})?$/;
 const personalIdRegEx = /^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})/;
+
 // All the variables targeting the input fields that needs to validated
-const firstNameInput = document.querySelector('#firstName');
-const lastNameInput = document.querySelector('#lastName');
-const emailInput = document.querySelector('#email');
-const phoneNumberInput = document.querySelector('#phoneNumber');
-const streetAdressInput = document.querySelector('#streetAdress');
-const zipCodeInput = document.querySelector('#zipCode');
-const cityInput = document.querySelector('#city');
-const personalIdInput = document.querySelector('#personalId');
-// Calls functions to validate the input from user when they change the value
-firstNameInput.addEventListener('blur', validateFirstName); 
-lastNameInput.addEventListener('blur', validateLastName);
-emailInput.addEventListener('blur', validateEmail);
-phoneNumberInput.addEventListener('blur', validatePhoneNumber);
-streetAdressInput.addEventListener('blur', validateStreet);
-zipCodeInput.addEventListener('blur', validateZipCode);
-cityInput.addEventListener('blur', validateCity);
-personalIdInput.addEventListener('blur', validatePersonalId);
-// Running all of the RegEx vs the info to validate in an if-statement function.  LÄGG TILL FELMEDDELANDE TOGGLES
-function validateFirstName (){
-  const firstName = firstNameInput.value
-  const result = nameRegEx.exec(firstName); 
-  if (result === null) {
-    console.log ('failed test');
-  }
-  else if (result.length > 0) {
-    console.log ('First name is working!');
-  };  
-}
-function validateLastName (){
-  const lastName = lastNameInput.value
-  const result = nameRegEx.exec(lastName); 
-
-  if (result === null) {
-    console.log ('failed test');
-  }
-  else if (result.length > 0) {
-    console.log ('Last name is working!');
-  };  
-}
-function validateEmail (){
-  const email = emailInput.value
-  const result = emailRegEx.exec(email); 
-
-  if (result === null) {
-    console.log ('failed test');
-  }
-  else if (result.length > 0) {
-    console.log ('Email is working!');
-  };  
-}
-function validatePhoneNumber (){
-  const phoneNumber = phoneNumberInput.value
-  const result = phoneNumberRegEx.exec(phoneNumber); 
-
-  if (result === null) {
-    console.log ('failed test');
-  }
-  else if (result.length > 0) {
-    console.log ('Phone is working!');
-  };  
-}
-function validateStreet (){
-  const streetAdress = streetAdressInput.value
-  const result = streetAdressRegEx.exec(streetAdress); 
-
-  if (result === null) {
-    console.log ('failed test');
-  }
-  else if (result.length > 0) {
-    console.log ('Adress is working!');
-  };  
-}
-function validateZipCode (){
-  const zipCode = zipCodeInput.value
-  const result = zipCodeRegEx.exec(zipCode); 
-
-  if (result === null) {
-    console.log ('failed test');
-  }
-  else if (result.length > 0) {
-    console.log ('Zip code is working!');
-  };  
-}
-function validateCity (){
-  const city = cityInput.value
-  const result = cityRegEx.exec(city); 
-
-  if (result === null) {
-    console.log ('failed test');
-  }
-  else if (result.length > 0) {
-    console.log ('City is working!');
-  };  
-}
-function validatePersonalId (){
-  const personalId = personalIdInput.value
-  const result = personalIdRegEx.exec(personalId); 
-
-  if (result === null) {
-    console.log ('failed test');
-  }
-  else if (result.length > 0) {
-    console.log ('Personal Id is working!');
-  };  
-}
-
-// Switch payment opt.
-// Payment divs
+const firstName = document.querySelector('#firstName');
+const lastName = document.querySelector('#lastName');
+const email = document.querySelector('#email');
+const phoneNumber = document.querySelector('#phoneNumber');
+const streetAdress = document.querySelector('#streetAdress');
+const zipCode = document.querySelector('#zipCode');
+const city = document.querySelector('#city');
+const personalId = document.querySelector('#personalId');
+const personalInfoCheck = document.getElementById('termsAndConditions');
+const invoiceRadioButton = document.querySelector('#invoice');
+const cardRadioButton = document.querySelector('#card');
 const invoiceContainer = document.querySelector('#invoiceContainer');
 const cardContainer = document.querySelector('#cardContainer');
+
+// Calls functions to validate the input from user when they change the value
+firstName.addEventListener('blur', checkInput); 
+lastName.addEventListener('blur', checkInput);
+email.addEventListener('blur', checkInput);
+phoneNumber.addEventListener('blur', checkInput);
+streetAdress.addEventListener('blur', checkInput);
+zipCode.addEventListener('blur', checkInput);
+city.addEventListener('blur', checkInput);
+personalId.addEventListener('blur', checkInput);
+personalInfoCheck.addEventListener('change', checkInput);
 // Radio btns to change divs
 const cardInvoiceRadios = Array.from(document.querySelectorAll('input[name="payment-option"]'));
 cardInvoiceRadios.forEach(radioBtn => {
   radioBtn.addEventListener('change', switchPaymentMethod);
+  radioBtn.addEventListener('change', checkInput);
 });
+
+
+// Switch PAYMENT OPTIONS
 function switchPaymentMethod() {
   invoiceContainer.classList.toggle('hidden');
   cardContainer.classList.toggle('hidden');
 }
 
+// VALIDATION 
+// Running all of the RegEx for the different fields + see if option for radio/ checkbox is checked. 
+function validateFirstName (){
+  return nameRegEx.exec(firstName.value); 
+}
+function validateLastName (){
+  return nameRegEx.exec(lastName.value); 
+}
+function validateEmail (){
+  return emailRegEx.exec(email.value); 
+}
+function validatePhoneNumber (){
+  return phoneNumberRegEx.exec(phoneNumber.value);
+}
+function validateStreet (){
+  return streetAdressRegEx.exec(streetAdress.value); 
+}
+function validateZipCode (){
+  return zipCodeRegEx.exec(zipCode.value);  
+}
+function validateCity (){
+  return cityRegEx.exec(city.value);
+}
+function validatePersonalId (){
+  return personalIdRegEx.exec(personalId.value);  
+}
+function validatePersonalInfoCheck (){
+  return personalInfoCheck.checked;
+}
+
+
+// Checks for error msg. Adds a new one if one isn't currently present and RegEx is invalid. Removes if valid.  
+function displayInputError(spanName, isValid) {  // Fel säger att alla är valid. Gör om gör rätt ..... InputField
+  const span = document.querySelector(spanName);
+  if (!isValid) {
+    span.classList.add('error'); 
+  }
+  else {
+    span.classList.remove('error'); 
+    return true;
+  }
+}
+// Calls all possible error mrg functions.
+function allDisplayInputErrors (){
+  if (firstName.value.length > 1){
+    displayInputError('#firstNameSpan', validateFirstName());
+  }
+  if (lastName.value.length > 1){
+    displayInputError('#lastNameSpan', validateLastName());
+  }
+  if (email.value.length > 1){
+    displayInputError('#emailSpan', validateEmail());
+  }
+  if (phoneNumber.value.length > 1){
+    displayInputError('#phoneNumberSpan', validatePhoneNumber());
+  }
+  if (streetAdress.value.length > 1){
+    displayInputError('#streetAdressSpan', validateStreet());
+  }
+  if (zipCode.value.length > 1){
+    displayInputError('#zipCodeSpan', validateZipCode());
+  }
+  if (city.value.length > 1){
+    displayInputError('#citySpan', validateCity()); 
+  }
+  if (personalId.value.length > 1){
+    displayInputError('#personalIdSpan', validatePersonalId());
+  }
+  displayInputError('#termsAndConditionsSpan', validatePersonalInfoCheck());
+}
+// Runs a check to see if the entire form is valid. If yes, activate order btn. 
+function checkInput() {
+allDisplayInputErrors();
+  if (cardRadioButton.checked) {
+    if (
+      validateFirstName() &&
+      validateLastName() &&
+      validateEmail() &&
+      validatePhoneNumber() &&
+      validateStreet() &&
+      validateZipCode() &&
+      validateCity() &&
+      validatePersonalInfoCheck()) {
+      activateOrderBtn();
+    } else {
+      deactivateOrderBtn();
+    }
+  } else if (invoiceRadioButton.checked) {
+    if (
+      validateFirstName() &&
+      validateLastName() &&
+      validateEmail() &&
+      validatePhoneNumber() &&
+      validateStreet() &&
+      validateZipCode() &&
+      validateCity() &&
+      validatePersonalInfoCheck() &&
+      validatePersonalId()) {
+      activateOrderBtn();
+    } else {
+      deactivateOrderBtn();
+    }
+  }
+};
 
 // SEND ORDER BTN
 // Send order button variable from HTML + eventlistener
 const orderBtn = document.querySelector('#sendOrderBtn');
-orderBtn.addEventListener('click', summaryPopUp);
+orderBtn.addEventListener('click', summaryPopUp); // change to -> sendOrder(); when made!!!! 
 
-// Add validation funtion -> remove disabled from BTN !!! 
+// Activate order BTN
+function activateOrderBtn() {
+  orderBtn.removeAttribute('disabled');
+  console.log('Activating orderBtn');
+};
+// Deactivate order BTN
+function deactivateOrderBtn() {
+  orderBtn.setAttribute('disabled', 'disabled');
+};
 
 // Targets the container in which we will loop our order summary.
 const summaryPopUpContainer = document.querySelector('#summaryPopUpContainer');
@@ -528,7 +560,7 @@ const summaryPopUpContainer = document.querySelector('#summaryPopUpContainer');
 function summaryPopUp() {
   // Resets inner HTML from previous run with a personalised thank you. 
   summaryPopUpContainer.innerHTML = `
-  <h2>Thank you for your purchase ${firstNameInput.value} ${lastNameInput.value}!</h2>
+  <h2>Thank you for your purchase ${firstName.value} ${lastName.value}!</h2>
   <p> We appreciate your patronage. 
   Should you have any questions or need any further assistance, feel free to reach out. 
   We look forward to serving you again in the future.</p> 
@@ -592,21 +624,6 @@ function clearInputValues(divId) {
   }
 }
 
-
-
-summaryPopUp(); 
-
-
-// Add summary of products - name, category, price total (ind.price * amount of product) + price total for purchases.
-// Add orderform - firstName, lastName, adress, postcode, town, optional: door code, phonenumber, e-mail.
-// Card as payment option -> cardnumber, date/year, CVC (don't validate these at this point in time)
-// Bill as payment option -> swedishPersonalNumber, (validate on length and starting with either '20' or '19' IF 12 numbers long)
-// Add checkbox 'Collecting of personal information' - not checked
-// Add checkbox 'News and updates email list' - checked
-// Add send button that activates only IF checkbox 'personal info' is ticked + form is validated. Otherwise = gray
-// Add clear form button - clears all the information AND the cart
-// When order is accepted -> send off + clear cart + announce summary + time until delivery + thank customer.
-// Add field to put in discount code (Needs to work? Yes or no?)
 
 // SPECIAL RULES FUNCTION (3 days)
 /* const today = new Date();

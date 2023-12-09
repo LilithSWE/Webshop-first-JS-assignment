@@ -108,15 +108,15 @@
       <div class="orderFormContainer" id="orderFormContainer">
         <div class="orderFormAdressContainer">
           <label>
-            <span class="whiteTextColor">First Name</span>
+            <span class="whiteTextColor" id="firstNameSpan">First Name</span>
             <input type="text" name="firstName" placeholder="First Name" id="firstName" />
           </label>
           <label>
-            <span class="whiteTextColor">Last Name</span
+            <span class="whiteTextColor" id="lastNameSpan">Last Name</span
             ><input type="text" name="lastName" placeholder="Last Name" id="lastName" />
           </label>
           <label>
-            <span class="whiteTextColor">Email</span
+            <span class="whiteTextColor" id="emailSpan">Email</span
             ><input
               type="email"
               name="email"
@@ -125,11 +125,11 @@
             />
           </label>
           <label>
-            <span class="whiteTextColor">Phone Number</span
+            <span class="whiteTextColor" id="phoneNumberSpan">Phone Number</span
             ><input type="tel" name="phoneNumber" placeholder="07..." id="phoneNumber" />
           </label>
           <label>
-            <span class="whiteTextColor">Street Address</span
+            <span class="whiteTextColor" id="streetAdressSpan">Street Address</span
             ><input
               type="text"
               name="streetAdress"
@@ -138,11 +138,11 @@
             />
           </label>
           <label>
-            <span class="whiteTextColor">Postal/ Zip Code</span>
+            <span class="whiteTextColor" id="zipCodeSpan">Postal/ Zip Code</span>
             <input type="text" name="zipCode" placeholder="Postal/ Zip Code" id="zipCode" />
           </label>
           <label>
-            <span class="whiteTextColor">City</span>
+            <span class="whiteTextColor" id="citySpan">City</span>
             <input type="text" name="city" placeholder="City" id="city" />
           </label>
           <label>
@@ -162,7 +162,7 @@
         </div>
         <div class="orderFormInvoiceContainer" id="invoiceContainer">
           <label>
-            <span class="whiteTextColor">Personal ID number</span>
+            <span class="whiteTextColor" id="personalIdSpan">Personal ID number</span>
             <input type="text" name="personal-id" placeholder="000000-0000" id="personalId" />
           </label>
         </div>
@@ -198,13 +198,13 @@
             <input type="checkbox" name="newsletter" id="newsletter" checked />
           </label>
           <label>
-            <span class="whiteTextColor">I accept the handling of my personal information.</span>
+            <span class="whiteTextColor" id="termsAndConditionsSpan">I accept the handling of my personal information.</span>
             <input type="checkbox" name="termsAndConditions" id="termsAndConditions" />
           </label>
         </div>
         <div class="orderFormBtnContainer">
           <button id="clearAllBtn">Clear</button>
-          <button id="sendOrderBtn">Order</button> <!-- disabled -->
+          <button id="sendOrderBtn" disabled>Order</button> <!-- disabled -->
         </div>
         <article class="summaryPopUpContainer hidden" id="summaryPopUpContainer">
           <!-- Loop in thank you, summary + delivery time from JS -->
@@ -266,3 +266,114 @@ INCLUDE SASS_
         @include cart_product($light-theme: false);
       }
  -->
+
+
+
+
+
+
+
+
+ <!-- 
+
+
+
+ // Funktion för skicka-knappen
+ function finalCheckout(e) {
+   // Skicka inte in formuläret
+   e.preventDefault();
+   activateCheckoutBtn();
+   checkInput();
+   if (isCardChosen()) {
+     if (
+       validateFName() &&
+       validateLName() &&
+       validateAdress() &&
+       validatePostalCode() &&
+       validatePostalArea() &&
+       validatePhoneNumber() &&
+       validateEmail() &&
+       validatePolicy()
+     ) {
+       console.log('Allt är ifyllt rätt');
+       orderDone.classList.remove('hidden');
+       // eslint-disable-next-line
+       gsap.fromTo(orderDone, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+       window.scrollTo(0, 0);
+     } else {
+       wrongInput();
+       console.log('Please correct the form errors before submitting.');
+     }
+   } else if (isInvoiceChosen()) {
+     if (
+       validateFName() &&
+       validateLName() &&
+       validateAdress() &&
+       validatePostalCode() &&
+       validatePostalArea() &&
+       validatePhoneNumber() &&
+       validateEmail() &&
+       validatePolicy() &&
+       validateSocialNr()
+     ) {
+       console.log('Allt är ifyllt rätt');
+       orderDone.classList.remove('hidden');
+       // eslint-disable-next-line
+       gsap.fromTo(orderDone, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+       window.scrollTo(0, 0);
+     } else {
+       wrongInput();
+       console.log('Please correct the form errors before submitting.');
+     }
+   }
+ }
+ 
+
+
+// Checks for error msg. Adds a new one if one isn't currently present and RegEx is invalid. Removes if valid.  
+function displayInputError(inputField, isValid) {
+  const messageElement = document.querySelector(`#${inputField}-error`);
+  const inputErrorField = document.querySelector(`#${inputField}`);
+  if (!isValid) {
+    if (!messageElement) {
+      const errorMessage = errorMessageInput[inputField];
+      const newErrorElement = document.createElement('span');
+      inputErrorField.classList.add('input_error_field');
+      newErrorElement.classList.add('input_error_message', 'hidden');
+      newErrorElement.id = `${inputField}-error`;
+      newErrorElement.innerText = errorMessage;
+      document
+        .getElementById(`${inputField}-errorContainer`)
+        .append(newErrorElement);
+    }
+  } else if (messageElement) {
+    messageElement.remove();
+    document.getElementById(inputField).classList.remove('error_field');
+    document.getElementById(inputField).classList.remove('input_error_field');
+  }
+}
+
+// Error messages
+const errorMessageInput = {
+  firstName: 'Please check this field again.',
+  lastName: 'Please check this field again.',
+  email: 'Please enter a valid email address.',
+  phoneNumber: 'Please enter a valid phone number.',
+  streetAdress: 'Please enter a valid street address.',
+  zipCode: 'Please enter a valid postal code.',
+  city: 'Please enter a valid postal area.',
+  personalId: 'Please enter a valid social security number.',
+  personalInfoCheck: 'You need to agree to this to put in an order',
+};
+
+
+
+
+
+ // Kallar på skickaknappen
+ checkoutBtn.addEventListener('click', finalCheckout);
+ orderForm.addEventListener('submit', finalCheckout);
+ 
+  -->
+ 
+

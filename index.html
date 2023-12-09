@@ -39,12 +39,12 @@
   <body>
     <header>
       <h1>Amanda's Amigurumi</h1>
-      <a href="#cart">
-        <button><span class="material-symbols-outlined"> shopping_basket </span></button>
-        <div class="productCounter hidden" id="productCounter"></div>
-      </a>
+      <button>
+        <span class="material-symbols-outlined"> shopping_basket </span>
+      </button>
+      <div class="productCounter hidden" id="productCounter"></div>
     </header>
-    <section class="home">
+    <div class="home">
       <!-- Välkommnande meddelande + intro till affären -->
       <article>
         <h2>Welcome to <span class="toUpperCase">Amanda's Amigurumi</span>!</h2>
@@ -64,8 +64,8 @@
           every stitch tells a tale of creativity, joy, and the art of amigurumi magic!
         </p>
       </article>
-    </section>
-    <section class="productList">
+    </div>
+    <div class="productList">
       <button class="sortBtnOpenMenu toUpperCase" id="sortBtnOpenMenu">
         <span class="material-symbols-outlined"> category </span>sort
       </button>
@@ -99,14 +99,14 @@
           </div>
         </div>
       </section>
-      <section class="productsContainer" id="productsContainer">
+      <div class="productsContainer" id="productsContainer">
         <!--Loop for Products-->
-      </section>
-    </section>
-    <section class="cart" id="cart">
+      </div>
+    </div>
+    <div class="cart" id="cart">
       <!-- Loop for cart -->
-    </section>
-    <section class="orderForm" id="orderForm">
+    </div>
+    <div class="orderForm" id="orderForm">
       <div class="orderFormContainer" id="orderFormContainer">
         <div class="orderFormAdressContainer">
           <label>
@@ -119,12 +119,7 @@
           </label>
           <label>
             <span class="whiteTextColor" id="emailSpan">Email</span
-            ><input
-              type="email"
-              name="email"
-              placeholder="Amanda@amigurumi.com"
-              id="email"
-            />
+            ><input type="email" name="email" placeholder="Amanda@amigurumi.com" id="email" />
           </label>
           <label>
             <span class="whiteTextColor" id="phoneNumberSpan">Phone Number</span
@@ -132,12 +127,7 @@
           </label>
           <label>
             <span class="whiteTextColor" id="streetAdressSpan">Street Address</span
-            ><input
-              type="text"
-              name="streetAdress"
-              placeholder="Street Adress"
-              id="streetAdress"
-            />
+            ><input type="text" name="streetAdress" placeholder="Street Adress" id="streetAdress" />
           </label>
           <label>
             <span class="whiteTextColor" id="zipCodeSpan">Postal/ Zip Code</span>
@@ -200,25 +190,35 @@
             <input type="checkbox" name="newsletter" id="newsletter" checked />
           </label>
           <label>
-            <span class="whiteTextColor" id="termsAndConditionsSpan">I accept the handling of my personal information.</span>
+            <span class="whiteTextColor" id="termsAndConditionsSpan"
+              >I accept the handling of my personal information.</span
+            >
             <input type="checkbox" name="termsAndConditions" id="termsAndConditions" />
           </label>
         </div>
         <div class="orderFormBtnContainer">
           <button id="clearAllBtn">Clear</button>
-          <button id="sendOrderBtn" disabled>Order</button> <!-- disabled -->
+          <button id="sendOrderBtn" disabled>Order</button>
+          <!-- disabled -->
         </div>
         <article class="summaryPopUpContainer hidden" id="summaryPopUpContainer">
           <!-- Loop in thank you, summary + delivery time from JS -->
         </article>
       </div>
-    </section>
+    </div>
+    <div class="timeOutContainer hidden" id="timeOutContainer">
+      <div class="timeOutMsg" id="timeOutMsg">
+        <h3>I'm sorry, you were to slow!</h3>
+        <p>Your order has been cleared.</p>
+        <button class="timeOutBtn" id="timeOutBtn">Close</button>
+      </div>
+    </div>
     <footer class="contact">
       <h3>Contact information:</h3>
       <address>
         <div>
           <h4>E-mail:</h4>
-          <p id="email"><a href="mailto:help@amandasamigurumi.com">help@amandasamigurumi.com</a></p>
+          <p id="emailFooter"><a href="mailto:help@amandasamigurumi.com">help@amandasamigurumi.com</a></p>
         </div>
         <div>
           <h4>Adress:</h4>

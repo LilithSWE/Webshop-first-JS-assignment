@@ -24,10 +24,10 @@ body {
 .hidden {
   display: none !important;
 }
-.error{
-  background-color: $darkPinkColor; 
+.error {
+  background-color: $darkPinkColor;
   color: rgb(169, 29, 29);
-  font-size: bold;
+  font-weight: bold;
   padding-inline: 5px;
   border-radius: 5px;
   border: 1px solid black;
@@ -47,7 +47,7 @@ button:active {
   color: black;
 }
 button:disabled {
-  background-color:rgb(150, 150, 150);
+  background-color: rgb(150, 150, 150);
   color: black;
 }
 header {
@@ -71,36 +71,35 @@ header {
   h1 {
     font-family: 'Amatic SC', sans-serif;
     font-size: clamp(0.5rem, 9vw, 10rem);
-    text-wrap: nowrap;
     margin: 0;
     letter-spacing: 3px;
     grid-column: 1;
   }
-  a{
-    button {
-      width: 3rem;
-      height: 50px;
-      grid-column: 2;
-    }
-    div.productCounter {
-      height: 25px;
-      width: 25px;
-      background-color: $darkPinkColor;
-      border: 2px dotted white;
-      position: absolute;
-      right: 47px;
-      top: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      font-weight: bold;
-      color: white;
-    }
+  button {
+    width: 3rem;
+    height: 50px;
+    grid-column: 2;
   }
-  
+  div.productCounter {
+    height: 25px;
+    width: 25px;
+    background-color: $darkPinkColor;
+    border: 2px dotted white;
+    position: absolute;
+    right: 47px;
+    top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+  }
 }
-section {
+.home,
+.productList,
+.cart,
+.orderForm {
   padding: 10px 20px;
   width: 100%;
 }
@@ -187,7 +186,7 @@ section {
       }
     }
   }
-  section.productsContainer {
+  .productsContainer {
     display: grid;
     max-width: 100%;
     padding: 0;
@@ -196,7 +195,7 @@ section {
     justify-items: center;
     gap: 15px;
     justify-content: space-evenly;
-    article {
+    .productLoopContainer {
       background-color: $lightPinkColor;
       max-width: 320px;
       height: auto;
@@ -309,7 +308,6 @@ section {
       font-family: 'Montserrat', sans-serif;
       font-size: 1rem;
       text-align: center;
-      text-justify: center;
     }
     p.individualCartPrice {
       font-size: clamp(1rem, 4vw, 3rem);
@@ -336,20 +334,20 @@ section {
       display: grid;
       grid-template-columns: 50% 50%;
       gap: 10px;
-      button{
+      button {
         width: 90%;
         height: 2.5rem;
         border-radius: 10px;
         font-size: clamp(1rem, 6vw, 2rem);
       }
-      a{
+      a {
         width: 100%;
-        button{
+        button {
           height: 2.5rem;
           border-radius: 10px;
           font-size: clamp(1rem, 6vw, 2rem);
         }
-      }     
+      }
     }
   }
 }
@@ -483,9 +481,9 @@ section {
         font-size: clamp(1rem, 7vw, 2rem);
       }
     }
-    article.summaryPopUpContainer{
+    article.summaryPopUpContainer {
       position: fixed;
-      top:8%;
+      top: 8%;
       left: 2.5%;
       width: 95%;
       min-width: 280px;
@@ -496,21 +494,21 @@ section {
       border: 6px solid white;
       border-radius: 20px;
       display: flex;
-      flex-direction: column; 
+      flex-direction: column;
       gap: 10px;
       overflow: scroll;
-      h2{
+      h2 {
         font-size: clamp(1rem, 8vw, 4rem);
       }
-      p{
+      p {
         font-size: clamp(1rem, 5vw, 4rem);
         margin: 0;
       }
-      h4{
+      h4 {
         font-size: clamp(1rem, 6vw, 6rem);
         margin-bottom: 2px;
       }
-      article{
+      article {
         border: 2px solid $purpleColor;
         background-color: $darkPinkColor;
         border-radius: 10px;
@@ -521,7 +519,7 @@ section {
         grid-template-rows: 50px 50px;
         justify-items: center;
         align-items: end;
-        img{
+        img {
           grid-row: span 2;
           width: 5rem;
           height: 5rem;
@@ -529,13 +527,13 @@ section {
           border-radius: 50px;
           align-self: center;
         }
-        h3{
-        grid-column: 2/span 2;
-        margin: 0;
-        font-size: clamp(1rem, 4vw, 5rem);
-        font-family: 'Montserrat', sans-serif;
+        h3 {
+          grid-column: 2 / span 2;
+          margin: 0;
+          font-size: clamp(1rem, 4vw, 5rem);
+          font-family: 'Montserrat', sans-serif;
         }
-        p{
+        p {
           font-weight: bold;
           margin-block: 0;
           align-self: center;
@@ -543,11 +541,11 @@ section {
           font-family: 'Montserrat', sans-serif;
         }
       }
-      p.delivery{
+      p.delivery {
         margin-top: 20px;
         font-weight: bold;
       }
-      button{
+      button {
         height: 3rem;
         width: 50%;
         align-self: center;
@@ -555,6 +553,51 @@ section {
         font-size: 2rem;
         color: black;
       }
+    }
+  }
+}
+.timeOutContainer {
+  background-color: rgba(47, 47, 47, 0.7);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  max-height: 100%;
+  max-width: 100%;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  div.timeOutMsg {
+    background-color: $lightPinkColor;
+    border: 6px dotted white;
+    border-radius: 20px;
+    z-index: 3;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    min-height: 100px;
+    width: 70%;
+    padding: 30px 5vw;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    h3 {
+      font-size: 3rem;
+      font-family: 'Amatic SC', sans-serif;
+      margin-bottom: 0;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+    button.timeOutBtn {
+      height: auto;
+      width: 90%;
+      font-size: 3rem;
+      border: 3px dotted white;
+      background-color: $purpleColor;
     }
   }
 }

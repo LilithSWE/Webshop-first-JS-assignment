@@ -4,7 +4,49 @@
 /* eslint-disable no-console */
 /* eslint-disable no-use-before-define */
 
+// SPECIAL RULES FUNCTIONS
 
+// RULE NUMBER 6: TIMER
+const timeOutContainer = document.querySelector('#timeOutContainer');
+const timeOutBtn = document.querySelector('#timeOutBtn');
+let timerRunning = false;
+let timerId;
+timeOutBtn.addEventListener('click', closeTimerPopUp);
+// If no choices has been made in 15 min, clear and show popup.
+function fifteenMinHasPassed() {
+  timeOutContainer.classList.remove('hidden');
+  clearAllChoices();
+}
+// Close btn activates the hiddden class again.
+function closeTimerPopUp() {
+  timeOutContainer.classList.add('hidden');
+}
+// Start timer
+function startTimer(duration) {
+  timerId = setTimeout(fifteenMinHasPassed, duration);
+  timerRunning = true;
+}
+// Stop timer
+function stopTimer() {
+  if (timerRunning) {
+    clearTimeout(timerId);
+    timerRunning = false;
+  }
+}
+
+/* const today = new Date();
+function mondayMorningDiscount(){
+  if (today.getDay() === 1 &&
+  today.getHours >= 0 &&
+  today.getHours <= 10)  {
+    console.log('Idag är det måndag.');
+  }
+  else{
+    console.log('ingen rabatt');
+  }
+}; 
+mondayMorningDiscount();
+ */
 
 // PRODUCT LIST
 // All the different products. Can add or remove products as needed.
@@ -156,18 +198,18 @@ loopProductsToHTML(); // Initiates function once to get the products to the page
 function loopProductsToHTML() {
   productsContainer.innerHTML = ''; // Clears container.
   for (let i = 0; i < products.length; i++) {
-    productsContainer.innerHTML += `<article>
-    <img src='${products[i].image.src}' alt='${products[i].image.alt}' height='${products[i].image.height} width='${products[i].image.width}' loading='lazy'>
+    productsContainer.innerHTML += `<div class='productLoopContainer'>
+    <img src='${products[i].image.src}' alt='${products[i].image.alt}' height='${products[i].image.height}' width='${products[i].image.width}' loading='lazy'>
     <h2 class='capitalize'>${products[i].name}</h2>
     <p class='fade capitalize'> ${products[i].category} </p>
     <p>Rating: ${products[i].rating} / 5</p>
     <p>${products[i].price} kr/st</p>
     <div>
-      <button class='subtractBtn' id='${i}'>-</button>
+      <button class='subtractBtn' id='minus${i}'>-</button>
       <p>${products[i].amount}</p>
       <button class='addBtn' id='${i}'>+</button>
     </div>
-    </article>`;
+    </div>`;
   }
   remakeButtons();
   updateCart();
@@ -266,17 +308,26 @@ function addProductAmount(e) {
   const i = e.currentTarget.id;
   products[i].amount += 1;
   setTimeout(loopProductsToHTML, 200);
+  if (!timerRunning) {
+    startTimer(1000 * 60 * 15);
+  }
+  console.log(products[i].amount);
+  console.log([i]);
 }
+
 // Decreases the amount of product in the product list, but not bellow 0.
 function reduceProductAmount(e) {
-  const i = e.currentTarget.id;
+  const i = e.currentTarget.id.replace('minus', '');
   if (products[i].amount > 0) {
     products[i].amount -= 1;
     setTimeout(loopProductsToHTML, 200);
+    if (!timerRunning) {
+      startTimer(1000 * 60 * 15);
+    }
   }
+  console.log(products[i].amount);
+  console.log([i]);
 }
-
-
 
 // CART
 // For loop to clear section and then create HTML elements + loop to the HTML structure inside an <article> each. Re-used post sorting.
@@ -291,12 +342,12 @@ function updateCart() {
     cartAmountTotal += cart[i].amount;
     const individualCartPrice = Number(cart[i].amount) * Number(cart[i].price); // Calculates the price of each product in cart
     cartContainer.innerHTML += `<article>
-      <img src='${cart[i].image.src}' alt='${cart[i].image.alt}' height='${cart[i].image.height} width='${cart[i].image.width}' loading='lazy'>
+      <img src='${cart[i].image.src}' alt='${cart[i].image.alt}' height='${cart[i].image.height}' width='${cart[i].image.width}' loading='lazy'>
       <h2>${cart[i].name}</h2>
       <p class='individualCartPrice fade''>${individualCartPrice}kr</p>
       <button class='clearOneBtn' id='${i}'>X</button>
       <div class= 'cartAmountContainer'>
-        <button class='subtractBtnCart' id='${i}'>-</button>
+        <button class='subtractBtnCart' id='minus${i}'>-</button>
         <p class='fade'>${cart[i].amount}</p>
         <button class='addBtnCart' id='${i}'>+</button>
       </div>
@@ -315,7 +366,7 @@ function updateCart() {
   updateCartCounter(cartAmountTotal);
   remakeCartButtons();
 }
-// Update the counter number on the shopping cart button.
+// Update the counter number on the shopping cart button. Visual feedback of added products!
 function updateCartCounter(e) {
   const productCounter = document.querySelector('#productCounter');
   productCounter.innerHTML = e;
@@ -356,14 +407,20 @@ function addCartAmount(e) {
   const i = e.currentTarget.id;
   cart[i].amount += 1;
   setTimeout(loopProductsToHTML, 200);
+  if (!timerRunning) {
+    startTimer(1000 * 60 * 15);
+  }
 }
 // Decreases the amount of product in the cart list, but not below 0.
 function reduceCartAmount(e) {
   const cart = products.filter(product => product.amount > 0);
-  const i = e.currentTarget.id;
+  const i = e.currentTarget.id.replace('minus', '');
   if (cart[i].amount > 0) {
     cart[i].amount -= 1;
     setTimeout(loopProductsToHTML, 200);
+    if (!timerRunning) {
+      startTimer(1000 * 60 * 15);
+    }
   }
 }
 // Clear one items 'total amount' in cart
@@ -379,14 +436,12 @@ function clearCart() {
     products[i].amount = 0;
   }
   setTimeout(loopProductsToHTML, 200);
+  stopTimer();
 }
 // Add animation to total price whenever the product amount changes, calculation is already done.
 // Add animation to updateCartCounter whenever the product amount changes.
 
-
-
-
-// ORDERFORM 
+// ORDERFORM
 // VALIDATION
 // All RegEx for validation of user information
 const nameRegEx = /^[a-zäöå,.'-]+$/i; // Used for both names
@@ -413,7 +468,7 @@ const invoiceContainer = document.querySelector('#invoiceContainer');
 const cardContainer = document.querySelector('#cardContainer');
 
 // Calls functions to validate the input from user when they change the value
-firstName.addEventListener('blur', checkInput); 
+firstName.addEventListener('blur', checkInput);
 lastName.addEventListener('blur', checkInput);
 email.addEventListener('blur', checkInput);
 phoneNumber.addEventListener('blur', checkInput);
@@ -429,86 +484,84 @@ cardInvoiceRadios.forEach(radioBtn => {
   radioBtn.addEventListener('change', checkInput);
 });
 
-
 // Switch PAYMENT OPTIONS
 function switchPaymentMethod() {
   invoiceContainer.classList.toggle('hidden');
   cardContainer.classList.toggle('hidden');
 }
 
-// VALIDATION 
-// Running all of the RegEx for the different fields + see if option for radio/ checkbox is checked. 
-function validateFirstName (){
-  return nameRegEx.exec(firstName.value); 
+// VALIDATION
+// Running all of the RegEx for the different fields + see if option for radio/ checkbox is checked.
+function validateFirstName() {
+  return nameRegEx.exec(firstName.value);
 }
-function validateLastName (){
-  return nameRegEx.exec(lastName.value); 
+function validateLastName() {
+  return nameRegEx.exec(lastName.value);
 }
-function validateEmail (){
-  return emailRegEx.exec(email.value); 
+function validateEmail() {
+  return emailRegEx.exec(email.value);
 }
-function validatePhoneNumber (){
+function validatePhoneNumber() {
   return phoneNumberRegEx.exec(phoneNumber.value);
 }
-function validateStreet (){
-  return streetAdressRegEx.exec(streetAdress.value); 
+function validateStreet() {
+  return streetAdressRegEx.exec(streetAdress.value);
 }
-function validateZipCode (){
-  return zipCodeRegEx.exec(zipCode.value);  
+function validateZipCode() {
+  return zipCodeRegEx.exec(zipCode.value);
 }
-function validateCity (){
+function validateCity() {
   return cityRegEx.exec(city.value);
 }
-function validatePersonalId (){
-  return personalIdRegEx.exec(personalId.value);  
+function validatePersonalId() {
+  return personalIdRegEx.exec(personalId.value);
 }
-function validatePersonalInfoCheck (){
+function validatePersonalInfoCheck() {
   return personalInfoCheck.checked;
 }
 
-
-// Checks for error msg. Adds a new one if one isn't currently present and RegEx is invalid. Removes if valid.  
-function displayInputError(spanName, isValid) {  // Fel säger att alla är valid. Gör om gör rätt ..... InputField
+// Checks for error msg. Adds a new one if one isn't currently present and RegEx is invalid. Removes if valid.
+function displayInputError(spanName, isValid) {
+  // Fel säger att alla är valid. Gör om gör rätt ..... InputField
   const span = document.querySelector(spanName);
   if (!isValid) {
-    span.classList.add('error'); 
-  }
-  else {
-    span.classList.remove('error'); 
+    span.classList.add('error');
+  } else {
+    span.classList.remove('error');
     return true;
   }
 }
 // Calls all possible error mrg functions.
-function allDisplayInputErrors (){
-  if (firstName.value.length > 1){
+function allDisplayInputErrors() {
+  if (firstName.value.length > 1) {
     displayInputError('#firstNameSpan', validateFirstName());
   }
-  if (lastName.value.length > 1){
+  if (lastName.value.length > 1) {
     displayInputError('#lastNameSpan', validateLastName());
   }
-  if (email.value.length > 1){
+  if (email.value.length > 1) {
     displayInputError('#emailSpan', validateEmail());
   }
-  if (phoneNumber.value.length > 1){
+  if (phoneNumber.value.length > 1) {
     displayInputError('#phoneNumberSpan', validatePhoneNumber());
   }
-  if (streetAdress.value.length > 1){
+  if (streetAdress.value.length > 1) {
     displayInputError('#streetAdressSpan', validateStreet());
   }
-  if (zipCode.value.length > 1){
+  if (zipCode.value.length > 1) {
     displayInputError('#zipCodeSpan', validateZipCode());
   }
-  if (city.value.length > 1){
-    displayInputError('#citySpan', validateCity()); 
+  if (city.value.length > 1) {
+    displayInputError('#citySpan', validateCity());
   }
-  if (personalId.value.length > 1){
+  if (personalId.value.length > 1) {
     displayInputError('#personalIdSpan', validatePersonalId());
   }
   displayInputError('#termsAndConditionsSpan', validatePersonalInfoCheck());
 }
-// Runs a check to see if the entire form is valid. If yes, activate order btn. 
+// Runs a check to see if the entire form is valid. If yes, activate order btn.
 function checkInput() {
-allDisplayInputErrors();
+  allDisplayInputErrors();
   if (cardRadioButton.checked) {
     if (
       validateFirstName() &&
@@ -518,7 +571,8 @@ allDisplayInputErrors();
       validateStreet() &&
       validateZipCode() &&
       validateCity() &&
-      validatePersonalInfoCheck()) {
+      validatePersonalInfoCheck()
+    ) {
       activateOrderBtn();
     } else {
       deactivateOrderBtn();
@@ -533,41 +587,41 @@ allDisplayInputErrors();
       validateZipCode() &&
       validateCity() &&
       validatePersonalInfoCheck() &&
-      validatePersonalId()) {
+      validatePersonalId()
+    ) {
       activateOrderBtn();
     } else {
       deactivateOrderBtn();
     }
   }
-};
+}
 
 // SEND ORDER BTN
 // Send order button variable from HTML + eventlistener
 const orderBtn = document.querySelector('#sendOrderBtn');
-orderBtn.addEventListener('click', summaryPopUp); // change to -> sendOrder(); when made!!!! 
+orderBtn.addEventListener('click', summaryPopUp); // change to -> sendOrder(); when made!!!!
 
 // Activate order BTN
 function activateOrderBtn() {
   orderBtn.removeAttribute('disabled');
-  console.log('Activating orderBtn');
-};
+}
 // Deactivate order BTN
 function deactivateOrderBtn() {
   orderBtn.setAttribute('disabled', 'disabled');
-};
+}
 
 // Targets the container in which we will loop our order summary.
 const summaryPopUpContainer = document.querySelector('#summaryPopUpContainer');
-// Function that generates and displays the thank you, order summary and the estimated deliverytime + removes class ='hidden'. 
+// Function that generates and displays the thank you, order summary and the estimated deliverytime + removes class ='hidden'.
 function summaryPopUp() {
-  // Resets inner HTML from previous run with a personalised thank you. 
+  // Resets inner HTML from previous run with a personalised thank you.
   summaryPopUpContainer.innerHTML = `
   <h2>Thank you for your purchase ${firstName.value} ${lastName.value}!</h2>
   <p> We appreciate your patronage. 
   Should you have any questions or need any further assistance, feel free to reach out. 
   We look forward to serving you again in the future.</p> 
   <h4 class='orderSummaryTitle'>Order Summary:</h4>`;
-  // Loops out the same summary that cart has, with some edits to amount of information and without the buttons. 
+  // Loops out the same summary that cart has, with some edits to amount of information and without the buttons.
   let sum = 0;
   const cart = products.filter(product => product.amount > 0);
   for (let i = 0; i < cart.length; i++) {
@@ -581,7 +635,7 @@ function summaryPopUp() {
       </article>`;
   }
   // Adds the total price and an estimated delivery time
-  summaryPopUpContainer.innerHTML+=`
+  summaryPopUpContainer.innerHTML += `
   <p>Total price: ${sum}kr.</p>
   <p class= 'delivery'>Estimated delivery: </p>
   <p>3-4 buissness days.</p>
@@ -591,53 +645,42 @@ function summaryPopUp() {
   makeCloseBtnSummary();
 }
 // Adds eventlistener to the close btn made in the summaryPopUp function.
-function makeCloseBtnSummary(){
+function makeCloseBtnSummary() {
   const closeSummaryBtn = document.querySelector('#closeSummaryBtn');
   closeSummaryBtn.addEventListener('click', closeSummaryPopUpContainer);
 }
-// Puts class hidden on oder summary to hide it away + runs function to clear orderform + all products.amount. 
-function closeSummaryPopUpContainer (){
+// Puts class hidden on oder summary to hide it away + runs function to clear orderform + all products.amount.
+function closeSummaryPopUpContainer() {
   summaryPopUpContainer.classList.add('hidden');
-  clearAllChoices(); 
+  clearAllChoices();
+  stopTimer();
 }
 
 // CLEAR ALL BTN
-// Clear all info button. 
+// Clear all info button.
 const clearAllBtn = document.querySelector('#clearAllBtn');
 clearAllBtn.addEventListener('click', clearAllChoices);
-// A function to clear orderform + all products.amount. 
+// A function to clear orderform + all products.amount.
 function clearAllChoices() {
-  // Calls prev function to clear all pruducts. 
+  // Calls prev function to clear all pruducts.
   clearCart();
-  // Runs functions with all divs in the oderFormContainer. 
-  clearInputValues('orderFormContainer');  
+  // Runs functions with all divs in the oderFormContainer.
+  clearInputValues('orderFormContainer');
 }
-// Clears all values from the inputs in the div Ids that we send in. 
+// Clears all values from the inputs in the div Ids that we send in.
 function clearInputValues(divId) {
   const div = document.getElementById(divId);
   if (div) {
-      // Get all input elements within the div
-      const inputs = div.getElementsByTagName('input');
-      for (let i = 0; i < inputs.length; i++) {
-          inputs[i].value = '';
-      }
+    // Get all input elements within the div
+    const inputs = div.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].value = '';
+    }
   } else {
-      console.error('Div not found with id:', divId);
+    console.error('Div not found with id:', divId);
   }
 }
 
-
-// SPECIAL RULES FUNCTION (3 days)
-/* const today = new Date();
-console.log(today.getHours());
-
-if (today.getDay() === 0) {
-  console.log('Idag är det söndag.');
-}
-else{
-  console.log('Idag är det INTE söndag.'); 
-  }
-  */
 /* WEBSITE: https://www.w3schools.com/js/js_dates.asp */
 
 // IF Monday 00.00 -> 10.00 = 10% discount, tell customer somehow
@@ -646,9 +689,7 @@ else{
 // IF the order contains at least 10 of one kind, lower the total price for that individual item by 10%
 // IF customer orders more than 15 products, shipping is free
 // IF customer orders less than 15 products, shipping is 25kr + 10% of total amount for cart.
-// If the customer hasn't ordered withni 15 min, clear the cart and announce that the customer was too slow.
 // The whole order should be able to be performed using only the keyboard.
-// The whole thing should be a one-pager.
 // Mörk tema
 
 // BEFORE SUBMITTING

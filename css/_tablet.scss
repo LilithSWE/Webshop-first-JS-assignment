@@ -5,7 +5,7 @@ header {
     font-size: clamp(3rem, 8vw, 3.8rem);
     letter-spacing: 11px;
   }
-  a{
+  a {
     button {
       width: 5rem;
     }
@@ -14,9 +14,8 @@ header {
       width: 30px;
       right: 5.4rem;
       top: 0.3rem;
-     
-  }
-   border-radius: 20px;
+    }
+    border-radius: 20px;
   }
 }
 .productList {
@@ -62,10 +61,10 @@ header {
       }
     }
   }
-  section.productsContainer {
+  .productsContainer {
     grid-template-columns: repeat(2, 50%);
     gap: 30px;
-    article {
+    .productLoopContainer {
       width: 100%;
       img {
         width: clamp(200px, 30vw, 300px);
@@ -113,13 +112,13 @@ header {
         border-radius: 20px;
         font-size: clamp(1rem, 6vw, 3rem);
       }
-      a{
+      a {
         width: 35%;
-        button{
-        width: 100%;
-        height: 4rem;
-        border-radius: 20px;
-        font-size: clamp(1rem, 6vw, 3rem);
+        button {
+          width: 100%;
+          height: 4rem;
+          border-radius: 20px;
+          font-size: clamp(1rem, 6vw, 3rem);
         }
       }
     }
@@ -138,28 +137,41 @@ header {
         }
       }
     }
-    article.summaryPopUpContainer{
-      h2{
+    article.summaryPopUpContainer {
+      h2 {
         font-size: clamp(1rem, 11vw, 4rem);
         text-align: center;
         font-family: 'Amatic SC', sans-serif;
       }
-      p{
+      p {
         font-size: clamp(1rem, 3vw, 4rem);
       }
-      h4{
+      h4 {
         font-size: clamp(1rem, 4vw, 6rem);
       }
-      article{
+      article {
         width: 80%;
         align-self: center;
-        h3{
-        font-size: clamp(1rem, 4vw, 5rem);
+        h3 {
+          font-size: clamp(1rem, 4vw, 5rem);
         }
-        p{
+        p {
           font-size: clamp(1rem, 3vw, 6rem);
         }
       }
+    }
+  }
+}
+.timeOutContainer {
+  div.timeOutMsg {
+    padding: 30px 8vw;
+    h3 {
+      font-size: 4rem;
+      font-family: 'Amatic SC', sans-serif;
+      margin-bottom: 0;
+    }
+    button.timeOutBtn {
+      width: 90%;
     }
   }
 }

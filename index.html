@@ -39,8 +39,10 @@
   <body>
     <header>
       <h1>Amanda's Amigurumi</h1>
-      <button><span class="material-symbols-outlined"> shopping_basket </span></button>
-      <div class="productCounter hidden" id="productCounter"></div>
+      <a href="#cart">
+        <button><span class="material-symbols-outlined"> shopping_basket </span></button>
+        <div class="productCounter hidden" id="productCounter"></div>
+      </a>
     </header>
     <section class="home">
       <!-- Välkommnande meddelande + intro till affären -->
@@ -266,114 +268,3 @@ INCLUDE SASS_
         @include cart_product($light-theme: false);
       }
  -->
-
-
-
-
-
-
-
-
- <!-- 
-
-
-
- // Funktion för skicka-knappen
- function finalCheckout(e) {
-   // Skicka inte in formuläret
-   e.preventDefault();
-   activateCheckoutBtn();
-   checkInput();
-   if (isCardChosen()) {
-     if (
-       validateFName() &&
-       validateLName() &&
-       validateAdress() &&
-       validatePostalCode() &&
-       validatePostalArea() &&
-       validatePhoneNumber() &&
-       validateEmail() &&
-       validatePolicy()
-     ) {
-       console.log('Allt är ifyllt rätt');
-       orderDone.classList.remove('hidden');
-       // eslint-disable-next-line
-       gsap.fromTo(orderDone, { opacity: 0 }, { opacity: 1, duration: 0.3 });
-       window.scrollTo(0, 0);
-     } else {
-       wrongInput();
-       console.log('Please correct the form errors before submitting.');
-     }
-   } else if (isInvoiceChosen()) {
-     if (
-       validateFName() &&
-       validateLName() &&
-       validateAdress() &&
-       validatePostalCode() &&
-       validatePostalArea() &&
-       validatePhoneNumber() &&
-       validateEmail() &&
-       validatePolicy() &&
-       validateSocialNr()
-     ) {
-       console.log('Allt är ifyllt rätt');
-       orderDone.classList.remove('hidden');
-       // eslint-disable-next-line
-       gsap.fromTo(orderDone, { opacity: 0 }, { opacity: 1, duration: 0.3 });
-       window.scrollTo(0, 0);
-     } else {
-       wrongInput();
-       console.log('Please correct the form errors before submitting.');
-     }
-   }
- }
- 
-
-
-// Checks for error msg. Adds a new one if one isn't currently present and RegEx is invalid. Removes if valid.  
-function displayInputError(inputField, isValid) {
-  const messageElement = document.querySelector(`#${inputField}-error`);
-  const inputErrorField = document.querySelector(`#${inputField}`);
-  if (!isValid) {
-    if (!messageElement) {
-      const errorMessage = errorMessageInput[inputField];
-      const newErrorElement = document.createElement('span');
-      inputErrorField.classList.add('input_error_field');
-      newErrorElement.classList.add('input_error_message', 'hidden');
-      newErrorElement.id = `${inputField}-error`;
-      newErrorElement.innerText = errorMessage;
-      document
-        .getElementById(`${inputField}-errorContainer`)
-        .append(newErrorElement);
-    }
-  } else if (messageElement) {
-    messageElement.remove();
-    document.getElementById(inputField).classList.remove('error_field');
-    document.getElementById(inputField).classList.remove('input_error_field');
-  }
-}
-
-// Error messages
-const errorMessageInput = {
-  firstName: 'Please check this field again.',
-  lastName: 'Please check this field again.',
-  email: 'Please enter a valid email address.',
-  phoneNumber: 'Please enter a valid phone number.',
-  streetAdress: 'Please enter a valid street address.',
-  zipCode: 'Please enter a valid postal code.',
-  city: 'Please enter a valid postal area.',
-  personalId: 'Please enter a valid social security number.',
-  personalInfoCheck: 'You need to agree to this to put in an order',
-};
-
-
-
-
-
- // Kallar på skickaknappen
- checkoutBtn.addEventListener('click', finalCheckout);
- orderForm.addEventListener('submit', finalCheckout);
- 
-  -->
- 
-

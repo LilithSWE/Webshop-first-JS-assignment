@@ -307,7 +307,9 @@ function updateCart() {
     <p>Total order price: ${sum}</p>
     <div class= 'bottomCartBtnContainer'>
       <button class="clearCartBtn">Clear</button>
-      <button class="orderBtn">Order</button>
+      <a href='#orderForm'>
+        <button class="orderBtn">Order</button>
+      </a>
     </div>
   </div>`;
   updateCartCounter(cartAmountTotal);

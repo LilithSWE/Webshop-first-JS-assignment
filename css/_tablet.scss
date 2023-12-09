@@ -5,15 +5,18 @@ header {
     font-size: clamp(3rem, 8vw, 3.8rem);
     letter-spacing: 11px;
   }
-  button {
-    width: 5rem;
+  a{
+    button {
+      width: 5rem;
+    }
+    div.productCounter {
+      height: 30px;
+      width: 30px;
+      right: 5.4rem;
+      top: 0.3rem;
+     
   }
-  div.productCounter {
-    height: 30px;
-    width: 30px;
-    right: 5.4rem;
-    top: 0.3rem;
-    border-radius: 20px;
+   border-radius: 20px;
   }
 }
 .productList {
@@ -103,12 +106,21 @@ header {
   }
   div.bottomCartContainer {
     div.bottomCartBtnContainer {
-      button.clearCartBtn,
-      button.orderBtn {
+      justify-items: center;
+      button {
         width: 35%;
         height: 4rem;
         border-radius: 20px;
         font-size: clamp(1rem, 6vw, 3rem);
+      }
+      a{
+        width: 35%;
+        button{
+        width: 100%;
+        height: 4rem;
+        border-radius: 20px;
+        font-size: clamp(1rem, 6vw, 3rem);
+        }
       }
     }
   }

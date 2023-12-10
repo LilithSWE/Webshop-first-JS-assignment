@@ -5,7 +5,6 @@
 /* eslint-disable no-use-before-define */
 
 // SPECIAL RULES FUNCTIONS
-
 // RULE NUMBER 6: TIMER
 const timeOutContainer = document.querySelector('#timeOutContainer');
 const timeOutBtn = document.querySelector('#timeOutBtn');
@@ -34,19 +33,14 @@ function stopTimer() {
   }
 }
 
-/* const today = new Date();
-function mondayMorningDiscount(){
-  if (today.getDay() === 1 &&
-  today.getHours >= 0 &&
-  today.getHours <= 10)  {
-    console.log('Idag är det måndag.');
-  }
-  else{
-    console.log('ingen rabatt');
-  }
-}; 
-mondayMorningDiscount();
- */
+// HEADER
+// A function that works as an anchorlink with a smoth scroll.
+const cartHeaderBtn = document.querySelector('#cartHeaderBtn');
+cartHeaderBtn.addEventListener('click', goToCart);
+function goToCart() {
+  const targetSection = document.querySelector('#cart');
+  targetSection.scrollIntoView({ behavior: 'smooth' });
+}
 
 // PRODUCT LIST
 // All the different products. Can add or remove products as needed.
@@ -205,15 +199,16 @@ function loopProductsToHTML() {
     <p>Rating: ${products[i].rating} / 5</p>
     <p>${products[i].price} kr/st</p>
     <div>
-      <button class='subtractBtn' id='minus${i}'>-</button>
+      <button class='subtractBtn' id='minusProducts${i}'>-</button>
       <p>${products[i].amount}</p>
-      <button class='addBtn' id='${i}'>+</button>
+      <button class='addBtn' id='plusProducts${i}'>+</button>
     </div>
     </div>`;
   }
   remakeButtons();
   updateCart();
 }
+
 // SORTING
 // Open menu for sorting
 const sortMenu = document.querySelector('#sortPopDownMenu');
@@ -233,7 +228,7 @@ function remakeButtons() {
     btn.addEventListener('click', reduceProductAmount);
   });
 }
-// Generic sorting
+// GENERIC SORTING
 // Sorting function for all properties A->Z or 0 -> >0
 function sortProducts(property) {
   products.sort((a, b) => {
@@ -302,10 +297,11 @@ function sortProductsByPrice() {
 function sortProductsByPriceDown() {
   sortProductsBackwards('price');
 }
-// Changes in products amount
+
+// CHANGES IN PRODUCTS AMOUNT
 // Increases the amount of product in the product list
 function addProductAmount(e) {
-  const i = e.currentTarget.id;
+  const i = e.currentTarget.id.replace('plusProducts', '');
   products[i].amount += 1;
   setTimeout(loopProductsToHTML, 200);
   if (!timerRunning) {
@@ -314,10 +310,9 @@ function addProductAmount(e) {
   console.log(products[i].amount);
   console.log([i]);
 }
-
 // Decreases the amount of product in the product list, but not bellow 0.
 function reduceProductAmount(e) {
-  const i = e.currentTarget.id.replace('minus', '');
+  const i = e.currentTarget.id.replace('minusProducts', '');
   if (products[i].amount > 0) {
     products[i].amount -= 1;
     setTimeout(loopProductsToHTML, 200);
@@ -343,13 +338,13 @@ function updateCart() {
     const individualCartPrice = Number(cart[i].amount) * Number(cart[i].price); // Calculates the price of each product in cart
     cartContainer.innerHTML += `<article>
       <img src='${cart[i].image.src}' alt='${cart[i].image.alt}' height='${cart[i].image.height}' width='${cart[i].image.width}' loading='lazy'>
-      <h2>${cart[i].name}</h2>
-      <p class='individualCartPrice fade''>${individualCartPrice}kr</p>
+      <h2 class='capitalize'>${cart[i].name}</h2>
+      <p class='individualCartPrice fade'>${individualCartPrice}kr</p>
       <button class='clearOneBtn' id='${i}'>X</button>
       <div class= 'cartAmountContainer'>
-        <button class='subtractBtnCart' id='minus${i}'>-</button>
+        <button class='subtractBtnCart' id='minusCart${i}'>-</button>
         <p class='fade'>${cart[i].amount}</p>
-        <button class='addBtnCart' id='${i}'>+</button>
+        <button class='addBtnCart' id='plusCart${i}'>+</button>
       </div>
       </article>`;
   }
@@ -358,9 +353,7 @@ function updateCart() {
     <p>Total order price: ${sum}</p>
     <div class= 'bottomCartBtnContainer'>
       <button class="clearCartBtn">Clear</button>
-      <a href='#orderForm'>
-        <button class="orderBtn">Order</button>
-      </a>
+      <button class='orderBtn'>Order</button>
     </div>
   </div>`;
   updateCartCounter(cartAmountTotal);
@@ -389,6 +382,7 @@ function remakeCartButtons() {
   const reduceBtnCart = document.querySelectorAll('.subtractBtnCart');
   const clearOneBtn = document.querySelectorAll('.clearOneBtn');
   const clearCartBtn = document.querySelector('.clearCartBtn');
+  const cartOrderBtn = document.querySelector('.orderBtn');
   clearCartBtn.addEventListener('click', clearCart);
   addBtnCart.forEach(btn => {
     btn.addEventListener('click', addCartAmount);
@@ -399,12 +393,18 @@ function remakeCartButtons() {
   clearOneBtn.forEach(btn => {
     btn.addEventListener('click', clearOneProduct);
   });
+  cartOrderBtn.addEventListener('click', goToOrderForm);
+}
+// Anchorlink with a smoth scroll.
+function goToOrderForm() {
+  const targetSection = document.querySelector('#orderForm');
+  targetSection.scrollIntoView({ behavior: 'smooth' });
 }
 // CHANGES IN PRODUCT AMOUNTS - VIA CART
 // Increases the amount of product in the cart list
 function addCartAmount(e) {
   const cart = products.filter(product => product.amount > 0);
-  const i = e.currentTarget.id;
+  const i = e.currentTarget.id.replace('plusCart', '');
   cart[i].amount += 1;
   setTimeout(loopProductsToHTML, 200);
   if (!timerRunning) {
@@ -414,7 +414,7 @@ function addCartAmount(e) {
 // Decreases the amount of product in the cart list, but not below 0.
 function reduceCartAmount(e) {
   const cart = products.filter(product => product.amount > 0);
-  const i = e.currentTarget.id.replace('minus', '');
+  const i = e.currentTarget.id.replace('minusCart', '');
   if (cart[i].amount > 0) {
     cart[i].amount -= 1;
     setTimeout(loopProductsToHTML, 200);
@@ -438,8 +438,6 @@ function clearCart() {
   setTimeout(loopProductsToHTML, 200);
   stopTimer();
 }
-// Add animation to total price whenever the product amount changes, calculation is already done.
-// Add animation to updateCartCounter whenever the product amount changes.
 
 // ORDERFORM
 // VALIDATION
@@ -477,14 +475,15 @@ zipCode.addEventListener('blur', checkInput);
 city.addEventListener('blur', checkInput);
 personalId.addEventListener('blur', checkInput);
 personalInfoCheck.addEventListener('change', checkInput);
+
+// PAYMENT OPTIONS
 // Radio btns to change divs
 const cardInvoiceRadios = Array.from(document.querySelectorAll('input[name="payment-option"]'));
 cardInvoiceRadios.forEach(radioBtn => {
   radioBtn.addEventListener('change', switchPaymentMethod);
   radioBtn.addEventListener('change', checkInput);
 });
-
-// Switch PAYMENT OPTIONS
+// Switch payment options.
 function switchPaymentMethod() {
   invoiceContainer.classList.toggle('hidden');
   cardContainer.classList.toggle('hidden');
@@ -522,7 +521,6 @@ function validatePersonalInfoCheck() {
 
 // Checks for error msg. Adds a new one if one isn't currently present and RegEx is invalid. Removes if valid.
 function displayInputError(spanName, isValid) {
-  // Fel säger att alla är valid. Gör om gör rätt ..... InputField
   const span = document.querySelector(spanName);
   if (!isValid) {
     span.classList.add('error');
@@ -600,7 +598,6 @@ function checkInput() {
 // Send order button variable from HTML + eventlistener
 const orderBtn = document.querySelector('#sendOrderBtn');
 orderBtn.addEventListener('click', summaryPopUp); // change to -> sendOrder(); when made!!!!
-
 // Activate order BTN
 function activateOrderBtn() {
   orderBtn.removeAttribute('disabled');
@@ -626,13 +623,13 @@ function summaryPopUp() {
   const cart = products.filter(product => product.amount > 0);
   for (let i = 0; i < cart.length; i++) {
     sum += cart[i].amount * cart[i].price;
-    const individualCartPrice = Number(cart[i].amount) * Number(cart[i].price); // Calculates the price of each product in cart
-    summaryPopUpContainer.innerHTML += `<article>
+    const individualCartPrice = Number(cart[i].amount) * Number(cart[i].price);
+    summaryPopUpContainer.innerHTML += `<div>
       <img src='${cart[i].image.src}' alt='${cart[i].image.alt}' height='${cart[i].image.height} width='${cart[i].image.width}' loading='lazy'>
       <h3 class= 'capitalize'>${cart[i].name}</h3>
       <p class='fade'>Amount: ${cart[i].amount}</p>
-      <p class='individualCartPrice fade''>${individualCartPrice}kr</p>
-      </article>`;
+      <p class='individualCartPrice fade'>${individualCartPrice}kr</p>
+      </div>`;
   }
   // Adds the total price and an estimated delivery time
   summaryPopUpContainer.innerHTML += `
@@ -649,7 +646,7 @@ function makeCloseBtnSummary() {
   const closeSummaryBtn = document.querySelector('#closeSummaryBtn');
   closeSummaryBtn.addEventListener('click', closeSummaryPopUpContainer);
 }
-// Puts class hidden on oder summary to hide it away + runs function to clear orderform + all products.amount.
+// Puts class 'hidden' on order summary to hide it away + runs function to clear orderform + all products.amount.
 function closeSummaryPopUpContainer() {
   summaryPopUpContainer.classList.add('hidden');
   clearAllChoices();
@@ -662,12 +659,11 @@ const clearAllBtn = document.querySelector('#clearAllBtn');
 clearAllBtn.addEventListener('click', clearAllChoices);
 // A function to clear orderform + all products.amount.
 function clearAllChoices() {
-  // Calls prev function to clear all pruducts.
+  // Calls prev made function to clear all pruducts.
   clearCart();
-  // Runs functions with all divs in the oderFormContainer.
   clearInputValues('orderFormContainer');
 }
-// Clears all values from the inputs in the div Ids that we send in.
+// Clears all values from the inputs in the div IDs that we send in.
 function clearInputValues(divId) {
   const div = document.getElementById(divId);
   if (div) {
@@ -680,26 +676,3 @@ function clearInputValues(divId) {
     console.error('Div not found with id:', divId);
   }
 }
-
-/* WEBSITE: https://www.w3schools.com/js/js_dates.asp */
-
-// IF Monday 00.00 -> 10.00 = 10% discount, tell customer somehow
-// IF Friday 15.00 -> Monday 3.00 = +15% price, don't tell customer
-// IF customer total order price > 800kr, don't allow bill as payment option
-// IF the order contains at least 10 of one kind, lower the total price for that individual item by 10%
-// IF customer orders more than 15 products, shipping is free
-// IF customer orders less than 15 products, shipping is 25kr + 10% of total amount for cart.
-// The whole order should be able to be performed using only the keyboard.
-// Mörk tema
-
-// BEFORE SUBMITTING
-// README containging screenshots + names of ppl whom have been a part of the project
-// Validate HTML
-// Validate CSS - but don't put too much thought into it.
-
-// AMANDAS EXTRA PLANS, ONLY IF THERE IS TIME
-// Add menu for navigation attached to either side of screen or header
-// Add a 'back to top' button
-// Add pop-down cart menu
-// Change checkbox + radio btn color!
-// Change colorVariable names to more semantic names like "Primary, Backgroundcolor, ImageBoxes".

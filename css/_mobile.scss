@@ -30,7 +30,6 @@ body {
   font-weight: bold;
   padding-inline: 5px;
   border-radius: 5px;
-  border: 1px solid black;
 }
 button {
   background-color: $darkPinkColor;
@@ -108,7 +107,7 @@ header {
   font-size: clamp(1rem, 2vw, 2rem);
   article {
     margin: 20px;
-    border: 3px dotted $darkPinkColor;
+    border: 3px dotted $lightPurpleColor;
     border-radius: 20px;
     background-color: $lightPinkColor;
     padding: 10px 40px;
@@ -128,9 +127,9 @@ header {
   }
 }
 .productList {
-  padding-top: 70px;
+  padding-top: 145px;
   background-color: $pinkColor;
-  height: auto;
+  height: fit-content;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -149,21 +148,20 @@ header {
     align-items: center;
     justify-items: start;
     padding: 10px;
-    .material-symbols-outlined {
-      width: min-content;
-    }
   }
   section.sortPopDownMenu {
     grid-column: 1;
     background-color: $lightPinkColor;
     width: 100%;
+    max-width: 320px;
     height: auto;
+    padding: 10px;
     border: 3px dotted white;
     border-radius: 20px;
     display: grid;
     grid-template-columns: 45% 55%;
     grid-template-rows: 1fr 1fr;
-    gap: 10px;
+    gap: 5px;
     div {
       width: 100%;
       grid-column: span 1;
@@ -179,6 +177,7 @@ header {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        width: auto;
         button {
           width: 45px;
           height: auto;
@@ -243,7 +242,7 @@ header {
 }
 .cart {
   background-color: $darkPinkColor;
-  height: auto;
+  height: fit-content;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, 100%);
@@ -340,33 +339,30 @@ header {
         border-radius: 10px;
         font-size: clamp(1rem, 6vw, 2rem);
       }
-      a {
-        width: 100%;
-        button {
-          height: 2.5rem;
-          border-radius: 10px;
-          font-size: clamp(1rem, 6vw, 2rem);
-        }
-      }
     }
   }
 }
 .orderForm {
   background-color: $lightPurpleColor;
-  height: auto;
+  height: fit-content;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 7rem;
+  span {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: bold;
+    padding-inline: 5px;
+  }
   div.orderFormContainer {
     background-color: $purpleColor;
     border: 3px dotted white;
     border-radius: 15px;
     margin: 10px;
-    padding: 5px;
+    padding-top: 50px;
     width: 95%;
+    height: auto;
     display: flex;
     flex-direction: column;
     text-align: start;
@@ -376,15 +372,10 @@ header {
       flex-direction: column;
       text-align: start;
       align-items: center;
-      padding-top: 40px;
       padding-bottom: 10px;
       label {
         display: flex;
         width: 60vw;
-        span {
-          font-size: clamp(1rem, 4vw, 1.5rem);
-          font-weight: bold;
-        }
         input {
           display: block;
           height: 2rem;
@@ -431,6 +422,10 @@ header {
         }
       }
     }
+    div.orderFormInvoiceContainer,
+    div.orderFormCardContainer {
+      height: 20rem;
+    }
     div.orderFormPaymentContainer {
       flex-direction: row;
       width: 60vw;
@@ -447,6 +442,8 @@ header {
     div.orderFormCheckboxesContainer {
       label {
         align-items: center;
+        display: grid;
+        grid-template-columns: 70% 30%;
         span {
           font-size: clamp(1rem, 1vw, 1.5rem);
           padding-right: 5px;
@@ -458,6 +455,7 @@ header {
       }
       div.discountContainer {
         label {
+          display: block;
           align-items: start;
           flex-direction: column;
           margin-bottom: 20px;
@@ -481,7 +479,7 @@ header {
         font-size: clamp(1rem, 7vw, 2rem);
       }
     }
-    article.summaryPopUpContainer {
+    div.summaryPopUpContainer {
       position: fixed;
       top: 8%;
       left: 2.5%;
@@ -603,7 +601,8 @@ header {
 }
 footer {
   width: 100%;
-  height: fit-content;
+  max-width: 100vw;
+  height: auto;
   display: flex;
   flex-direction: column;
   padding-top: 10px;
@@ -629,7 +628,7 @@ footer {
     gap: 10px;
     justify-content: space-evenly;
     margin-bottom: 1rem;
-    h4 {
+    .adressHeading {
       margin-top: 1rem;
       margin-bottom: 0.2rem;
       font-size: clamp(0.5rem, 3vw, 2rem);

@@ -2,15 +2,55 @@
 
 This project was my first JS school assignment! I was tasked to create a one-pager webshop following certain requirements. Using pictures taken by myself of my crochet hobby projects I created Amanda's Amigurumi Webshop!
 
+Link to live project: https://medieinstitutet.github.io/fed23d-js-grundkurs-webshop-LilithSWE/
+
+## Languages used
+
+- HTML
+- SCSS
+- JavaScript
+
+## Author
+
+Amanda Hansson
+
 ## Lessons Learned
 
 - I learned how to make use of tools like Miro to set up the structure of the website in an easy to read way.
 - I learned how to write basic JS. How to make functions, call functions, create variables ect.
 - How to adapt the functions so that they are as versitile as possible, to avoid retyping parts of the code.
 - I've learned various types of JS functions and how to connect them in a way that prevents unnecessary loops.
--
+- I've learned about RegEx and validation of information.
+- How to prioritize on a tight deadline.
 
-## Requirements
+## Personal thoughts from the programmer
+
+I was moving cross country while I wrote this project and in the end I didn't manage to put in all of the features I had liked to add. It was a good lesson in how and what to prioritize however and I'm quite happy with what I managed in the short amount of time I had! I'm glad that I took my time to really learn all the functions and understand what they do, rather than just rushing through and copy pasting code, hoping it will all come together. It was a fun assignment and I'm looking forward to the next one!
+
+## Screenshots
+
+### Mobile
+
+<img src= "assets\screenshot\mobile_screenshot_1.png" width="250">
+<img src= "assets\screenshot\mobile_screenshot_2.png" width="250">
+<img src= "assets\screenshot\mobile_screenshot_3.png" width="250">
+<img src= "assets\screenshot\mobile_screenshot_4.png" width="250">
+
+### Tablet
+
+<img src= "assets\screenshot\tablet_screenshot_1.png" width="250">
+<img src= "assets\screenshot\tablet_screenshot_2.png" width="250">
+<img src= "assets\screenshot\tablet_screenshot_3.png" width="250">
+<img src= "assets\screenshot\tablet_screenshot_4.png" width="250">
+
+### Desktop
+
+<img src= "assets\screenshot\desktop_screenshot_1.png" width="250">
+<img src= "assets\screenshot\desktop_screenshot_2.png" width="250">
+<img src= "assets\screenshot\desktop_screenshot_3.png" width="250">
+<img src= "assets\screenshot\desktop_screenshot_4.png" width="250">
+
+## Requirements, in short form:
 
 ### General:
 
@@ -41,12 +81,12 @@ This project was my first JS school assignment! I was tasked to create a one-pag
 
 ### Special Rules:
 
-- Depending on time and weekday the prices should vary.
-- Depending on the total amount you may or may not use different types of payment methods.
-- Discount based on amount of products.
-- Shipping based on amount of products.
 - Timer on how long time the customer ha to complete the order, 15 min.
 - Visual feedback when price in basket changes
+- Depending on time and weekday the prices should vary. (missing)
+- Depending on the total amount you may or may not use different types of payment methods. (missing)
+- Discount based on amount of products. (missing)
+- Shipping based on amount of products. (missing)
 
 ### Customer info details:
 
@@ -58,6 +98,6 @@ This project was my first JS school assignment! I was tasked to create a one-pag
 - Clear button.
 - Discount code.
 
-## Screenshots
+## Special Thanks
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+A special thanks to my lovely classmates in FED23D and my teacher Jenni Pulli that all helped me along in this project.
